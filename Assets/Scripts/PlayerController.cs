@@ -24,18 +24,26 @@ public class PlayerController : MonoBehaviour
     {
 
         
-        vertical = Input.GetAxis("Vertical");
-        horizontal = Input.GetAxis("Horizontal");
+
 
         // Debug.Log(vertical);
-        Debug.DrawRay(transform.position, Vector3.down * 100000.0f, Color.green);
-        if (IsOnTheFloor()) { Debug.Log("Toca"); } else { Debug.Log("No toca"); }
+        //Debug.DrawRay(transform.position, Vector3.down * 100000.0f, Color.green);
+        //if (IsOnTheFloor()) { Debug.Log("Toca"); } else { Debug.Log("No toca"); }
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
+        {
+            Debug.Log("Entra");
 
-        if(vertical != 0 ) transform.Translate(speed * Time.deltaTime * Vector3.forward * vertical);
-        if (horizontal != 0) transform.Rotate(turnSpeed * Time.deltaTime * Vector3.up * horizontal);
+            vertical = Input.GetAxis("Vertical");
+            horizontal = Input.GetAxis("Horizontal");
+
+            if (vertical != 0) transform.Translate(speed * Time.deltaTime * Vector3.forward * vertical);
+            if (horizontal != 0) transform.Rotate(turnSpeed * Time.deltaTime * Vector3.up * horizontal);
+        }
+
         
     }
 
+    //does not work
     bool IsOnTheFloor()
     {
         

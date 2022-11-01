@@ -21,12 +21,18 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
 
-
+    public static GameManager sharedInstance;
     public GameState currentGameState = GameState.startMenu;
 
     public Canvas startMenuCanvas;
     //public Canvas inGameCanvas;
     //public Canvas endOfGameCanvas;
+
+
+    private void Awake()
+    {
+        sharedInstance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -63,5 +69,8 @@ public class GameManager : MonoBehaviour
             //inGameCanvas.enabled = true;
             //endOfGameCanvas.enabled = false;
         }
+
+
+        currentGameState = newGameState;
     }
 }
