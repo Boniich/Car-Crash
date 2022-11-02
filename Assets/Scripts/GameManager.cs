@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState = GameState.startMenu;
 
     public Canvas startMenuCanvas;
-    //public Canvas inGameCanvas;
+    public Canvas inGameCanvas;
     //public Canvas endOfGameCanvas;
 
     public int points = 0;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.startMenu;
         startMenuCanvas.enabled = true;
-        //inGameCanvas.enabled = false;
+        inGameCanvas.enabled = false;
         //endOfGameCanvas.enabled = false;
     }
 
@@ -63,12 +63,12 @@ public class GameManager : MonoBehaviour
         if(newGameState == GameState.startMenu)
         {
             startMenuCanvas.enabled = true;
-            //inGameCanvas.enabled = false;
+            inGameCanvas.enabled = false;
             //endOfGameCanvas.enabled = false;
         }else if(newGameState == GameState.inGame)
         {
             startMenuCanvas.enabled = false;
-            //inGameCanvas.enabled = true;
+            inGameCanvas.enabled = true;
             //endOfGameCanvas.enabled = false;
         }
 
@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         points += 10;
         Debug.Log("El personaje ha ganado: " + points);
+        ViewInGame.sharedInstance.UpdatePointLabel();
 
     }
 }
