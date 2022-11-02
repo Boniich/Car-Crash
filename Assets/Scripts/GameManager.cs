@@ -15,7 +15,7 @@ public enum GameState
     startMenu,
     //carSelect,
     inGame,
-    //endOfGame
+    endOfGame
 }
 
 public class GameManager : MonoBehaviour
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public Canvas startMenuCanvas;
     public Canvas inGameCanvas;
-    //public Canvas endOfGameCanvas;
+    public Canvas endOfGameCanvas;
 
     public int points = 0;
     public List<GameObject> obstacules;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.startMenu;
         startMenuCanvas.enabled = true;
         inGameCanvas.enabled = false;
-        //endOfGameCanvas.enabled = false;
+        endOfGameCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         if (obstacules.Count == 0)
         {
             Debug.Log("No hay mas obtaculos. El juego termino!");
+            EndGame();
         }
     }
 
@@ -62,18 +63,29 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void EndGame()
+    {
+        ChangeGameState(GameState.endOfGame);
+    }
+
+
     void ChangeGameState(GameState newGameState)
     {
         if(newGameState == GameState.startMenu)
         {
             startMenuCanvas.enabled = true;
             inGameCanvas.enabled = false;
-            //endOfGameCanvas.enabled = false;
+            endOfGameCanvas.enabled = false;
         }else if(newGameState == GameState.inGame)
         {
             startMenuCanvas.enabled = false;
             inGameCanvas.enabled = true;
-            //endOfGameCanvas.enabled = false;
+            endOfGameCanvas.enabled = false;
+        }else if(newGameState == GameState.endOfGame)
+        {
+            startMenuCanvas.enabled = false;
+            inGameCanvas.enabled = false;
+            endOfGameCanvas.enabled = true;
         }
 
 
