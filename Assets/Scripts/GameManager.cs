@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     //public Canvas inGameCanvas;
     //public Canvas endOfGameCanvas;
 
+    public int points = 0;
+
 
     private void Awake()
     {
@@ -72,5 +74,12 @@ public class GameManager : MonoBehaviour
 
 
         currentGameState = newGameState;
+    }
+
+    public void GainPoints()
+    {
+        points += 10;
+        Debug.Log("El personaje ha ganado: " + points);
+
     }
 }

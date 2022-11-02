@@ -16,7 +16,7 @@ public class CrashObstacule : MonoBehaviour
         if (collision.tag == "Player")
         {
             HideObstacule();
-            Debug.Log("Has sumado 10 puntos");
+            GameManager.sharedInstance.GainPoints();
         }
     }
 }
