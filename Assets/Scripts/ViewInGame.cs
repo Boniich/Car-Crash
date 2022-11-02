@@ -22,8 +22,11 @@ public class ViewInGame : MonoBehaviour
 
     public void UpdatePointLabel()
     {
+
         if(GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
+
+
             scoreTextPoint.text = GameManager.sharedInstance.points.ToString();
         }
     }

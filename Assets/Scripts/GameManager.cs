@@ -65,7 +65,9 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        
         ChangeGameState(GameState.endOfGame);
+        ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
     }
 
 
