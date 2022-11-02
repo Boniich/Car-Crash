@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     //public Canvas endOfGameCanvas;
 
     public int points = 0;
+    public List<GameObject> obstacules;
 
 
     private void Awake()
@@ -48,7 +49,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (obstacules.Count == 0)
+        {
+            Debug.Log("No hay mas obtaculos. El juego termino!");
+        }
     }
 
 
@@ -79,7 +83,6 @@ public class GameManager : MonoBehaviour
     public void GainPoints()
     {
         points += 10;
-        Debug.Log("El personaje ha ganado: " + points);
         ViewInGame.sharedInstance.UpdatePointLabel();
 
     }

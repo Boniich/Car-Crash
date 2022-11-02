@@ -2631,6 +2631,10 @@ MonoBehaviour:
   startMenuCanvas: {fileID: 454742802}
   inGameCanvas: {fileID: 608002783}
   points: 0
+  obstacules:
+  - {fileID: 1298209983}
+  - {fileID: 1517879136}
+  - {fileID: 1376808370}
 --- !u!1001 &432063209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8577,6 +8581,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.999991, y: 0, z: 20.000004}
   m_Center: {x: -2.4999955, y: 0, z: 0.000000067055225}
+--- !u!1 &1298209983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134104, guid: 71782582b9d2cac4cba5251a3b767d13, type: 3}
+  m_PrefabInstance: {fileID: 1521523717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1298209989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 456524, guid: 71782582b9d2cac4cba5251a3b767d13, type: 3}
@@ -9372,6 +9381,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.999991, y: 0, z: 20.000004}
   m_Center: {x: -2.4999955, y: 0, z: -0.00000014901161}
+--- !u!1 &1376808370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134104, guid: 71782582b9d2cac4cba5251a3b767d13, type: 3}
+  m_PrefabInstance: {fileID: 298792521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1376808376 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 456524, guid: 71782582b9d2cac4cba5251a3b767d13, type: 3}
@@ -10643,6 +10657,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 451096, guid: 367149bd17c4d4d4e8868ec6a5cf8d45, type: 3}
   m_PrefabInstance: {fileID: 1515556719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1517879136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134104, guid: 71782582b9d2cac4cba5251a3b767d13, type: 3}
+  m_PrefabInstance: {fileID: 972300634}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1517879142 stripped
 Transform:

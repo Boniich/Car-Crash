@@ -15,7 +15,9 @@ public class CrashObstacule : MonoBehaviour
        
         if (collision.tag == "Player")
         {
-            HideObstacule();
+            //HideObstacule();
+            GameManager.sharedInstance.obstacules.Remove(gameObject);
+            Destroy(gameObject);
             GameManager.sharedInstance.GainPoints();
         }
     }
