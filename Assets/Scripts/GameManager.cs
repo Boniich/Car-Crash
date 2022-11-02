@@ -86,4 +86,10 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdatePointLabel();
 
     }
+
+
+    public void RemoveObstaculeFromList(GameObject element)
+    {
+        obstacules.Remove(element);
+    }
 }

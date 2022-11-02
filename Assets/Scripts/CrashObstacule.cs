@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class CrashObstacule : MonoBehaviour
 {
-    void HideObstacule()
-    {
-        this.GetComponent<MeshRenderer>().enabled = false;
-        this.GetComponent<MeshCollider>().enabled = false;
-    }
-
     private void OnTriggerEnter(Collider collision)
     {
-       
+
         if (collision.tag == "Player")
-        {
-            //HideObstacule();
-            GameManager.sharedInstance.obstacules.Remove(gameObject);
+        { 
+            GameManager.sharedInstance.RemoveObstaculeFromList(gameObject);
             Destroy(gameObject);
             GameManager.sharedInstance.GainPoints();
         }
