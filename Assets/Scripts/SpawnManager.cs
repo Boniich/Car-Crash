@@ -10,12 +10,18 @@ public class SpawnManager : MonoBehaviour
     // x: -5 to 25
     // Start is called before the first frame update
     public GameObject[] obstacules;
+    private float[] spawnRangeX = { -5, 25 };
+    private float finalSpawnRangeY = 180;
     private float spawnPosZ;
     public int obstaculeIndex;
     void Start()
     {
         spawnPosZ = transform.position.z;
-        SpawnRandomObstacules();
+        for(int i = 0; i < 7; i++)
+        {
+            SpawnRandomObstacules();
+        }
+        
 
     }
 
@@ -24,9 +30,10 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnRandomObstacules()
     {
-        float xRand = Random.Range(-5, 15);
+        float xRand = Random.Range(spawnRangeX[0], spawnRangeX[1]);
+        float yRand = Random.Range(spawnPosZ, finalSpawnRangeY);
 
-        Vector3 spawnPos = new Vector3(xRand, 0, spawnPosZ);
+        Vector3 spawnPos = new Vector3(xRand, 0, yRand);
 
         obstaculeIndex = Random.Range(0, obstacules.Length);
 
