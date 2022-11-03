@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         if(SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0)
         {
             Debug.Log("No hay mas obtaculos. El juego termino!");
-            //EndGame();
+            EndGame();
         }
  
 
