@@ -48,12 +48,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (obstacules.Count == 0)
+
+        if(SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0)
         {
             Debug.Log("No hay mas obtaculos. El juego termino!");
-            EndGame();
-        }*/
+            //EndGame();
+        }
+ 
+
+           
+           
+
     }
 
 

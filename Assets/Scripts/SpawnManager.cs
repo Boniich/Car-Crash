@@ -9,12 +9,22 @@ public class SpawnManager : MonoBehaviour
     // y: 60 to 180
     // x: -5 to 25
     // Start is called before the first frame update
+    public static SpawnManager sharedInstance;
     public GameObject[] obstacules;
     private float[] spawnRangeX = { -5, 25 };
     private float finalSpawnRangeY = 180;
     private float spawnPosZ;
     public int obstaculeIndex;
     public int obstaculeCount = 7;
+    private int destroyObstaculeCount;
+
+
+    void Awake()
+    {
+        sharedInstance = this;
+        destroyObstaculeCount = obstaculeCount;
+    }
+
     void Start()
     {
         spawnPosZ = transform.position.z;
@@ -27,6 +37,17 @@ public class SpawnManager : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    public void ObstaculeDiscount()
+    {
+        destroyObstaculeCount--;
+        Debug.Log(destroyObstaculeCount);
+    }
+
+    public int GetDestroyedObstaculeCount()
+    {
+        return destroyObstaculeCount;
+    }
 
 
     void SpawnRandomObstacules()
