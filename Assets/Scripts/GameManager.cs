@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     public Canvas endOfGameCanvas;
 
     public int points = 0;
-    public List<GameObject> obstacules;
 
 
     private void Awake()
@@ -49,11 +48,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (obstacules.Count == 0)
         {
             Debug.Log("No hay mas obtaculos. El juego termino!");
             EndGame();
-        }
+        }*/
     }
 
 
@@ -108,9 +108,4 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-    public void RemoveObstaculeFromList(GameObject element)
-    {
-        obstacules.Remove(element);
-    }
 }

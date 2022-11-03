@@ -14,10 +14,11 @@ public class SpawnManager : MonoBehaviour
     private float finalSpawnRangeY = 180;
     private float spawnPosZ;
     public int obstaculeIndex;
+    public int obstaculeCount = 7;
     void Start()
     {
         spawnPosZ = transform.position.z;
-        for(int i = 0; i < 7; i++)
+        for(int i = 0; i < obstaculeCount; i++)
         {
             SpawnRandomObstacules();
         }

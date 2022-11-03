@@ -9,7 +9,6 @@ public class CrashObstacule : MonoBehaviour
 
         if (collision.tag == "Player")
         { 
-            GameManager.sharedInstance.RemoveObstaculeFromList(gameObject);
             Destroy(gameObject);
             GameManager.sharedInstance.GainPoints();
         }
