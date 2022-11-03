@@ -71,6 +71,13 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void PlayAgain()
+    {
+        ChangeGameState(GameState.inGame);
+       
+    }
+
+
     void ChangeGameState(GameState newGameState)
     {
         if(newGameState == GameState.startMenu)
