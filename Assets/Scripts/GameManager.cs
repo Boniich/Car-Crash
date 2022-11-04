@@ -113,9 +113,9 @@ public class GameManager : MonoBehaviour
         currentGameState = newGameState;
     }
 
-    public void GainPoints()
+    public void GainPoints(int pointsAmount)
     {
-        points += 10;
+        points += pointsAmount;
         ViewInGame.sharedInstance.UpdatePointLabel();
 
     }

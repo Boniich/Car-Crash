@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class CrashObstacule : MonoBehaviour
 {
+    public static CrashObstacule sharedInstance;
+
+    public int obstaculePoints;
+     void Awake()
+    {
+        sharedInstance = this;    
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -12,7 +19,7 @@ public class CrashObstacule : MonoBehaviour
         { 
             Destroy(gameObject);
             SpawnManager.sharedInstance.ObstaculeDiscount();
-            GameManager.sharedInstance.GainPoints();
+            GameManager.sharedInstance.GainPoints(obstaculePoints);
           
         }
     }
