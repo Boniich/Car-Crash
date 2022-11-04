@@ -5,18 +5,25 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    public static PlayerController sharedInstance;
     [Range(0, 50)]
     public float speed = 0.0f;
     [Range(0, 50)]
     public float turnSpeed = 0.0f;
     private float horizontal, vertical;
     public LayerMask ground;
+    private Vector3 startPlayerPosition;
 
+
+     void Awake()
+    {
+        sharedInstance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPlayerPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -41,6 +48,11 @@ public class PlayerController : MonoBehaviour
         }
 
         
+    }
+
+    public void ResetPlayerPosition()
+    {
+        transform.position = startPlayerPosition;
     }
 
     //does not work

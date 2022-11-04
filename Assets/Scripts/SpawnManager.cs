@@ -23,17 +23,12 @@ public class SpawnManager : MonoBehaviour
     {
         sharedInstance = this;
         destroyObstaculeCount = obstaculeCount;
+        Debug.Log("numeros:"+destroyObstaculeCount);
     }
 
     void Start()
     {
         spawnPosZ = transform.position.z;
-        for(int i = 0; i < obstaculeCount; i++)
-        {
-            SpawnRandomObstacules();
-        }
-        
-
     }
 
     // Update is called once per frame
@@ -49,16 +44,26 @@ public class SpawnManager : MonoBehaviour
         return destroyObstaculeCount;
     }
 
-
-    void SpawnRandomObstacules()
+    public void ResetDestroyedObstaculeCount()
     {
-        float xRand = Random.Range(spawnRangeX[0], spawnRangeX[1]);
-        float yRand = Random.Range(spawnPosZ, finalSpawnRangeY);
+        if(destroyObstaculeCount == 0) destroyObstaculeCount = obstaculeCount;
+    }
 
-        Vector3 spawnPos = new Vector3(xRand, 0, yRand);
 
-        obstaculeIndex = Random.Range(0, obstacules.Length);
+    public void SpawnRandomObstacules()
+    {
+        for(int i = 0; i < obstaculeCount; i++)
+        {
+            float xRand = Random.Range(spawnRangeX[0], spawnRangeX[1]);
+            float yRand = Random.Range(spawnPosZ, finalSpawnRangeY);
 
-        Instantiate(obstacules[obstaculeIndex], spawnPos, obstacules[obstaculeIndex].transform.rotation);
+            Vector3 spawnPos = new Vector3(xRand, 0, yRand);
+
+            obstaculeIndex = Random.Range(0, obstacules.Length);
+
+            Instantiate(obstacules[obstaculeIndex], spawnPos, obstacules[obstaculeIndex].transform.rotation);
+        }
+
+       
     }
 }

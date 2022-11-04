@@ -2045,6 +2045,7 @@ MonoBehaviour:
   obstacules:
   - {fileID: 134104, guid: 71782582b9d2cac4cba5251a3b767d13, type: 3}
   obstaculeIndex: 0
+  obstaculeCount: 7
 --- !u!1001 &363849682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2594,10 +2595,6 @@ MonoBehaviour:
   inGameCanvas: {fileID: 608002783}
   endOfGameCanvas: {fileID: 1936021066}
   points: 0
-  obstacules:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1001 &432063209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11837,7 +11834,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 428624553}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PlayAgain
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
