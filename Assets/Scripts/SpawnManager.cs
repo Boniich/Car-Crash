@@ -52,12 +52,29 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnRandomObstacules()
     {
+        float xRange = 0;
+        float yRange = 0;
+
         for(int i = 0; i < obstaculeCount; i++)
         {
-            float xRand = Random.Range(spawnRangeX[0], spawnRangeX[1]);
-            float yRand = Random.Range(spawnPosZ, finalSpawnRangeY);
 
-            Vector3 spawnPos = new Vector3(xRand, 0, yRand);
+            if(i == 0)
+            {
+                yRange = spawnPosZ;
+
+            } else if(i == obstaculeCount - 1)
+            {
+                yRange = finalSpawnRangeY;
+            }
+            else
+            {
+                yRange = Random.Range(spawnPosZ, finalSpawnRangeY);
+            }
+
+            xRange = Random.Range(spawnRangeX[0], spawnRangeX[1]);
+            
+
+            Vector3 spawnPos = new Vector3(xRange, 0, yRange);
 
             obstaculeIndex = Random.Range(0, obstacules.Length);
 
