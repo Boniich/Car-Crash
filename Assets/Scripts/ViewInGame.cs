@@ -22,6 +22,24 @@ public class ViewInGame : MonoBehaviour
         
     }
 
+
+    public void UpdateMaxScoreText()
+    {
+        maxScoreText.text = PlayerPrefs.GetInt("maxScore").ToString();
+    }
+
+    public void SetMaxScoreText(int points)
+    {
+
+        if(PlayerPrefs.GetInt("maxScore") < points)
+        {
+           PlayerPrefs.SetInt("maxScore", points);
+        }
+
+        
+    }
+
+
     public void UpdateObstaculeCountText()
     {
         obstaculeCountText.text = SpawnManager.sharedInstance.GetDestroyedObstaculeCount().ToString();

@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.inGame);
         SpawnManager.sharedInstance.SpawnRandomObstacules();
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
+        ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
 
 
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
         
         ChangeGameState(GameState.endOfGame);
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
+        ViewInGame.sharedInstance.SetMaxScoreText(points);
     }
 
     public void PlayAgain()
