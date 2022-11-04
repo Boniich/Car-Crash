@@ -4363,6 +4363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreTextPoint: {fileID: 1680989028}
+  maxScoreText: {fileID: 0}
+  obstaculeCountText: {fileID: 209692222}
 --- !u!1001 &647260522
 PrefabInstance:
   m_ObjectHideFlags: 0

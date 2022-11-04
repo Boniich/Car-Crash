@@ -7,6 +7,8 @@ public class ViewInGame : MonoBehaviour
 {
     public static ViewInGame sharedInstance;
     public TextMeshProUGUI scoreTextPoint;
+    public TextMeshProUGUI maxScoreText;
+    public TextMeshProUGUI obstaculeCountText;
     // Start is called before the first frame update
 
     private void Awake()
@@ -19,6 +21,12 @@ public class ViewInGame : MonoBehaviour
     {
         
     }
+
+    public void UpdateObstaculeCountText()
+    {
+        obstaculeCountText.text = SpawnManager.sharedInstance.GetDestroyedObstaculeCount().ToString();
+    }
+
 
     public void UpdatePointLabel()
     {
