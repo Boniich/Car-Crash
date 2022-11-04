@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class CrashObstacule : MonoBehaviour
 {
-    public static CrashObstacule sharedInstance;
-
+   
     public int obstaculePoints;
-     void Awake()
-    {
-        sharedInstance = this;    
-    }
 
     private void OnTriggerEnter(Collider collision)
     {
