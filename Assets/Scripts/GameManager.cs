@@ -66,10 +66,6 @@ public class GameManager : MonoBehaviour
     {
         ChangeGameState(GameState.inGame);
         SpawnManager.sharedInstance.SpawnRandomObstacules();
-        SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
-        PlayerController.sharedInstance.ResetPlayerPosition();
-        ResetPoints();
-        
     }
 
 
@@ -78,6 +74,14 @@ public class GameManager : MonoBehaviour
         
         ChangeGameState(GameState.endOfGame);
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
+    }
+
+    public void PlayAgain()
+    {
+        StartGame();
+        SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
+        PlayerController.sharedInstance.ResetPlayerPosition();
+        ResetPoints();
     }
 
     private void ResetPoints()
