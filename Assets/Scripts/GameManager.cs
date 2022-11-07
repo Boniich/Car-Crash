@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.endOfGame);
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
         ViewInGame.sharedInstance.SetMaxScoreText(points);
+        ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
     }
 
     public void PlayAgain()

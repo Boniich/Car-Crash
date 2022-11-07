@@ -9,6 +9,7 @@ public class ViewEndOfGame : MonoBehaviour
 
     public static ViewEndOfGame sharedInstance;
     public TextMeshProUGUI endScorePointText;
+    public TextMeshProUGUI maxScorePointText;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,11 @@ public class ViewEndOfGame : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateMaxScoreText()
+    {
+        maxScorePointText.text = PlayerPrefs.GetInt("maxScore").ToString();
     }
 
     public void UpdatePointsAtEndOfGame()
