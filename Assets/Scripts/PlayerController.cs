@@ -5,16 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public static PlayerController sharedInstance;
-    private Rigidbody _rigidbody;
+    public bool enablePhysicsEngine;
     [Range(0, 50)]
     public float speed = 0.0f;
     [Range(0, 50)]
     public float turnSpeed = 0.0f;
-    private float horizontal, vertical;
     public LayerMask ground;
+
+    public static PlayerController sharedInstance;
+    private Rigidbody _rigidbody;
+    private float horizontal, vertical;
     private Vector3 startPlayerPosition;
-    public bool enablePhysicsEngine;
+    
 
 
      void Awake()
@@ -33,16 +35,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        
-
-
-        // Debug.Log(vertical);
-        //Debug.DrawRay(transform.position, Vector3.down * 100000.0f, Color.green);
-        //if (IsOnTheFloor()) { Debug.Log("Toca"); } else { Debug.Log("No toca"); }
+   
         if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-            Debug.Log("Entra");
-
+  
             vertical = Input.GetAxis("Vertical");
             horizontal = Input.GetAxis("Horizontal");
 
@@ -83,17 +79,5 @@ public class PlayerController : MonoBehaviour
         transform.position = startPlayerPosition;
     }
 
-    //does not work
-    bool IsOnTheFloor()
-    {
-        
-        if (Physics.Raycast(this.transform.position, Vector2.down, 100.0f, ground.value))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+
 }

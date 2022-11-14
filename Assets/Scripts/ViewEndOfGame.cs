@@ -16,12 +16,6 @@ public class ViewEndOfGame : MonoBehaviour
         sharedInstance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateMaxScoreText()
     {
         maxScorePointText.text = PlayerPrefs.GetInt("maxScore").ToString();
@@ -32,8 +26,6 @@ public class ViewEndOfGame : MonoBehaviour
 
         if (GameManager.sharedInstance.currentGameState == GameState.endOfGame)
         {
-
-
             endScorePointText.text = GameManager.sharedInstance.points.ToString();
         }
     }

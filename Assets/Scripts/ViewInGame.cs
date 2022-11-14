@@ -16,12 +16,6 @@ public class ViewInGame : MonoBehaviour
         sharedInstance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void UpdateMaxScoreText()
     {
@@ -35,8 +29,6 @@ public class ViewInGame : MonoBehaviour
         {
            PlayerPrefs.SetInt("maxScore", points);
         }
-
-        
     }
 
 
@@ -51,8 +43,6 @@ public class ViewInGame : MonoBehaviour
 
         if(GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-
-
             scoreTextPoint.text = GameManager.sharedInstance.points.ToString();
         }
     }
