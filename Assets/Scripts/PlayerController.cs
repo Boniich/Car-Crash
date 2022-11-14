@@ -73,6 +73,9 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Reset the player position 
+    /// </summary>
 
     public void ResetPlayerPosition()
     {

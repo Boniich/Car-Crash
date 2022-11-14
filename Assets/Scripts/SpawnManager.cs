@@ -9,13 +9,15 @@ public class SpawnManager : MonoBehaviour
     // y: 60 to 180
     // x: -5 to 25
     // Start is called before the first frame update
+
+    public int obstaculeIndex;
+    public int obstaculeCount = 7;
     public static SpawnManager sharedInstance;
     public GameObject[] obstacules;
+
     private float[] spawnRangeX = { -5, 25 };
     private float finalSpawnRangeY = 180;
     private float spawnPosZ;
-    public int obstaculeIndex;
-    public int obstaculeCount = 7;
     private int destroyObstaculeCount;
 
 
@@ -31,24 +33,37 @@ public class SpawnManager : MonoBehaviour
         spawnPosZ = transform.position.z;
     }
 
-    // Update is called once per frame
 
+    /// <summary>
+    ///  Discount count of obstacules for now when game is over
+    /// </summary>
     public void ObstaculeDiscount()
     {
         destroyObstaculeCount--;
-        Debug.Log(destroyObstaculeCount);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> A count of obstacule destroyed </returns>
 
     public int GetDestroyedObstaculeCount()
     {
         return destroyObstaculeCount;
     }
 
+    /// <summary>
+    /// Reset the destroyed obstacule count for when the gameplay is reseted
+    /// </summary>
+
     public void ResetDestroyedObstaculeCount()
     {
         if(destroyObstaculeCount == 0) destroyObstaculeCount = obstaculeCount;
     }
 
+    /// <summary>
+    /// Generate a number of random obstacule, in ramdom position on the road
+    /// </summary>
 
     public void SpawnRandomObstacules()
     {

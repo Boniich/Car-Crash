@@ -16,11 +16,16 @@ public class ViewEndOfGame : MonoBehaviour
         sharedInstance = this;
     }
 
+    /// <summary>
+    /// Update the max score point in the view of endGame
+    /// </summary>
     public void UpdateMaxScoreText()
     {
         maxScorePointText.text = PlayerPrefs.GetInt("maxScore").ToString();
     }
-
+    /// <summary>
+    /// Update the score point in the view of endGame
+    /// </summary>
     public void UpdatePointsAtEndOfGame()
     {
 

@@ -16,11 +16,18 @@ public class ViewInGame : MonoBehaviour
         sharedInstance = this;
     }
 
-
+    /// <summary>
+    /// Update the max score point in the view of inGame
+    /// </summary>
     public void UpdateMaxScoreText()
     {
         maxScoreText.text = PlayerPrefs.GetInt("maxScore").ToString();
     }
+
+    /// <summary>
+    /// Check if the new score point obtained by player is higher than the old max score point
+    /// </summary>
+    /// <param name="points"> It get the score point obteined in the gameplay by player</param>
 
     public void SetMaxScoreText(int points)
     {
@@ -31,12 +38,18 @@ public class ViewInGame : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// It show the obstacule that player has to destroy. Each time that she destroy one it is updated
+    /// </summary>
 
     public void UpdateObstaculeCountText()
     {
         obstaculeCountText.text = SpawnManager.sharedInstance.GetDestroyedObstaculeCount().ToString();
     }
 
+    /// <summary>
+    /// Update the score points
+    /// </summary>
 
     public void UpdatePointLabel()
     {

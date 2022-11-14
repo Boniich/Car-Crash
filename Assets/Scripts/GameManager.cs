@@ -23,11 +23,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager sharedInstance;
     public GameState currentGameState = GameState.startMenu;
-
     public Canvas startMenuCanvas;
     public Canvas inGameCanvas;
     public Canvas endOfGameCanvas;
-
     public int points = 0;
 
 
@@ -56,7 +54,9 @@ public class GameManager : MonoBehaviour
    
     }
 
-
+    /// <summary>
+    /// Start the game when player press the button "Start"
+    /// </summary>
     public void StartGame()
     {
         ChangeGameState(GameState.inGame);
@@ -65,6 +65,10 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
 
+    /// <summary>
+    /// It change the state of game to "end of game" when obstacule is equal to zero
+    /// Update the max socre if is necessary
+    /// </summary>
 
     public void EndGame()
     {
@@ -75,6 +79,10 @@ public class GameManager : MonoBehaviour
         ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
     }
 
+    /// <summary>
+    /// Reset the game when player press the button "playe again"
+    /// </summary>
+
     public void PlayAgain()
     {
         SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
@@ -84,11 +92,20 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Reset the point for each gameplay
+    /// </summary>
+
     private void ResetPoints()
     {
         points = 0;
         ViewInGame.sharedInstance.UpdatePointLabel();
     }
+
+    /// <summary>
+    /// Handle the state of different game's view
+    /// </summary>
+    /// <param name="newGameState">It recive the new status that should be change</param>
 
     void ChangeGameState(GameState newGameState)
     {
@@ -113,6 +130,10 @@ public class GameManager : MonoBehaviour
         currentGameState = newGameState;
     }
 
+    /// <summary>
+    /// Incress the score point in code
+    /// </summary>
+    /// <param name="pointsAmount">Recibe diferent value depedding to value of obstacule</param>
     public void GainPoints(int pointsAmount)
     {
         points += pointsAmount;
