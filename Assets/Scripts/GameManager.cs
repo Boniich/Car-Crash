@@ -14,6 +14,7 @@ public enum GameState
 {
     startMenu,
     //carSelect,
+    optionMenu,
     inGame,
     endOfGame
 }
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
     public GameState currentGameState = GameState.startMenu;
     public Canvas startMenuCanvas;
+    public Canvas optionMenu;
     public Canvas inGameCanvas;
     public Canvas endOfGameCanvas;
     public int points = 0;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.startMenu;
         startMenuCanvas.enabled = true;
+        optionMenu.enabled = false;
         inGameCanvas.enabled = false;
         endOfGameCanvas.enabled = false;
     }
@@ -47,11 +50,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if(SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0)
+        if (SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0)
         {
             EndGame();
         }
-   
+
     }
 
     /// <summary>
@@ -65,6 +68,12 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
 
+
+    public void OpenOptionMenu()
+    {
+        ChangeGameState(GameState.optionMenu);
+    }
+
     /// <summary>
     /// It change the state of game to "end of game" when obstacule is equal to zero
     /// Update the max socre if is necessary
@@ -72,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        
+
         ChangeGameState(GameState.endOfGame);
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
         ViewInGame.sharedInstance.SetMaxScoreText(points);
@@ -89,7 +98,7 @@ public class GameManager : MonoBehaviour
         PlayerController.sharedInstance.ResetPlayerPosition();
         StartGame();
         ResetPoints();
-        
+
     }
 
     /// <summary>
@@ -109,19 +118,33 @@ public class GameManager : MonoBehaviour
 
     void ChangeGameState(GameState newGameState)
     {
-        if(newGameState == GameState.startMenu)
+        if (newGameState == GameState.startMenu)
         {
+            
             startMenuCanvas.enabled = true;
+            optionMenu.enabled = false;
             inGameCanvas.enabled = false;
             endOfGameCanvas.enabled = false;
-        }else if(newGameState == GameState.inGame)
+            
+           
+
+        } else if (newGameState == GameState.optionMenu) {
+
+            startMenuCanvas.enabled = false;
+            optionMenu.enabled = true;
+            inGameCanvas.enabled = false;
+            endOfGameCanvas.enabled = false;
+
+        } else if (newGameState == GameState.inGame)
         {
             startMenuCanvas.enabled = false;
+            optionMenu.enabled = false;
             inGameCanvas.enabled = true;
             endOfGameCanvas.enabled = false;
-        }else if(newGameState == GameState.endOfGame)
+        } else if (newGameState == GameState.endOfGame)
         {
             startMenuCanvas.enabled = false;
+            optionMenu.enabled = false;
             inGameCanvas.enabled = false;
             endOfGameCanvas.enabled = true;
         }
@@ -129,6 +152,8 @@ public class GameManager : MonoBehaviour
 
         currentGameState = newGameState;
     }
+
+
 
     /// <summary>
     /// Incress the score point in code
