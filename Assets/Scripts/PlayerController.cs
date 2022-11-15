@@ -5,14 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public bool enablePhysicsEngine;
-    [Range(0, 50)]
-    public float speed = 0.0f;
-    [Range(0, 50)]
-    public float turnSpeed = 0.0f;
-    public LayerMask ground;
-
     public static PlayerController sharedInstance;
+
+    [Range(0, 50), SerializeField] private float speed = 0.0f;
+    [Range(0, 50), SerializeField] private float turnSpeed = 0.0f;
+
+    [SerializeField] private bool enablePhysicsEngine;
+    
     private Rigidbody _rigidbody;
     private float horizontal, vertical;
     private Vector3 startPlayerPosition;
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
 
    
-        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
+        if (GameManager.sharedInstance.GetGameState() == GameState.inGame)
         {
   
             vertical = Input.GetAxis("Vertical");

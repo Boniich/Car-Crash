@@ -6,9 +6,10 @@ using UnityEngine;
 public class ViewInGame : MonoBehaviour
 {
     public static ViewInGame sharedInstance;
-    public TextMeshProUGUI scoreTextPoint;
-    public TextMeshProUGUI maxScoreText;
-    public TextMeshProUGUI obstaculeCountText;
+
+    [SerializeField]  private TextMeshProUGUI scoreTextPoint;
+    [SerializeField]  private TextMeshProUGUI maxScoreText;
+    [SerializeField]  private TextMeshProUGUI obstaculeCountText;
     // Start is called before the first frame update
 
     private void Awake()
@@ -54,9 +55,9 @@ public class ViewInGame : MonoBehaviour
     public void UpdatePointLabel()
     {
 
-        if(GameManager.sharedInstance.currentGameState == GameState.inGame)
+        if(GameManager.sharedInstance.GetGameState() == GameState.inGame)
         {
-            scoreTextPoint.text = GameManager.sharedInstance.points.ToString();
+            scoreTextPoint.text = GameManager.sharedInstance.GetPoints().ToString();
         }
     }
 }

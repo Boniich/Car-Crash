@@ -8,8 +8,8 @@ public class ViewEndOfGame : MonoBehaviour
 {
 
     public static ViewEndOfGame sharedInstance;
-    public TextMeshProUGUI endScorePointText;
-    public TextMeshProUGUI maxScorePointText;
+    [SerializeField] private TextMeshProUGUI endScorePointText;
+    [SerializeField] private TextMeshProUGUI maxScorePointText;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +29,9 @@ public class ViewEndOfGame : MonoBehaviour
     public void UpdatePointsAtEndOfGame()
     {
 
-        if (GameManager.sharedInstance.currentGameState == GameState.endOfGame)
+        if (GameManager.sharedInstance.GetGameState() == GameState.endOfGame)
         {
-            endScorePointText.text = GameManager.sharedInstance.points.ToString();
+            endScorePointText.text = GameManager.sharedInstance.GetPoints().ToString();
         }
     }
 }

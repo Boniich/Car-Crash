@@ -5,7 +5,7 @@ using UnityEngine;
 public class CrashObstacule : MonoBehaviour
 {
    
-    public int obstaculePoints;
+     [SerializeField] private int obstaculePoints;
 
     private void OnTriggerEnter(Collider collision)
     {

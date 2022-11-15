@@ -10,10 +10,12 @@ public class SpawnManager : MonoBehaviour
     // x: -5 to 25
     // Start is called before the first frame update
 
-    public int obstaculeIndex;
-    public int obstaculeCount = 7;
     public static SpawnManager sharedInstance;
-    public GameObject[] obstacules;
+
+    private int obstaculeIndex;
+    [SerializeField] private int obstaculeCount = 7;
+   
+    [SerializeField] private GameObject[] obstacules;
 
     private float[] spawnRangeX = { -5, 25 };
     private float finalSpawnRangeY = 180;
@@ -25,7 +27,6 @@ public class SpawnManager : MonoBehaviour
     {
         sharedInstance = this;
         destroyObstaculeCount = obstaculeCount;
-        Debug.Log("numeros:"+destroyObstaculeCount);
     }
 
     void Start()

@@ -23,12 +23,12 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager sharedInstance;
-    public GameState currentGameState = GameState.startMenu;
-    public Canvas startMenuCanvas;
-    public Canvas optionMenu;
-    public Canvas inGameCanvas;
-    public Canvas endOfGameCanvas;
-    public int points = 0;
+    private GameState currentGameState = GameState.startMenu;
+    [SerializeField]  private Canvas startMenuCanvas;
+    [SerializeField]  private Canvas optionMenu;
+    [SerializeField]  private Canvas inGameCanvas;
+    [SerializeField]  private Canvas endOfGameCanvas;
+    private int points = 0;
 
 
     private void Awake()
@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
         ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
+
+    /// <summary>
+    /// Call the method to change state with option menu state
+    /// </summary>
 
 
     public void OpenOptionMenu()
@@ -107,6 +111,18 @@ public class GameManager : MonoBehaviour
         points = 0;
         ViewInGame.sharedInstance.UpdatePointLabel();
     }
+
+
+    /// <summary>
+    /// Return the current state of game
+    /// </summary>
+    /// <returns></returns>
+
+    public GameState GetGameState()
+    {
+        return currentGameState;
+    }
+
 
     /// <summary>
     /// Handle the state of different game's view
@@ -152,6 +168,15 @@ public class GameManager : MonoBehaviour
         this.optionMenu.enabled = optionMenu;
         inGameCanvas.enabled = inGameMenu;
         endOfGameCanvas.enabled = endOfGameMenu;
+    }
+    /// <summary>
+    /// Return the value of variable points
+    /// </summary>
+    /// <returns></returns>
+
+    public int GetPoints()
+    {
+        return points;
     }
 
     /// <summary>
