@@ -40,10 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentGameState = GameState.startMenu;
-        startMenuCanvas.enabled = true;
-        optionMenu.enabled = false;
-        inGameCanvas.enabled = false;
-        endOfGameCanvas.enabled = false;
+        HandleViewActivation();
     }
 
     // Update is called once per frame
@@ -120,33 +117,20 @@ public class GameManager : MonoBehaviour
     {
         if (newGameState == GameState.startMenu)
         {
-            
-            startMenuCanvas.enabled = true;
-            optionMenu.enabled = false;
-            inGameCanvas.enabled = false;
-            endOfGameCanvas.enabled = false;
-            
-           
+
+            HandleViewActivation();
 
         } else if (newGameState == GameState.optionMenu) {
 
-            startMenuCanvas.enabled = false;
-            optionMenu.enabled = true;
-            inGameCanvas.enabled = false;
-            endOfGameCanvas.enabled = false;
+            HandleViewActivation(startMenu:false,optionMenu:true,inGameMenu:false,endOfGameMenu:false);
 
         } else if (newGameState == GameState.inGame)
         {
-            startMenuCanvas.enabled = false;
-            optionMenu.enabled = false;
-            inGameCanvas.enabled = true;
-            endOfGameCanvas.enabled = false;
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: true, endOfGameMenu: false);
+
         } else if (newGameState == GameState.endOfGame)
         {
-            startMenuCanvas.enabled = false;
-            optionMenu.enabled = false;
-            inGameCanvas.enabled = false;
-            endOfGameCanvas.enabled = true;
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: true);
         }
 
 
@@ -154,6 +138,21 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Handle the enabled and disabled of all different views in all moments necessary
+    /// </summary>
+    /// <param name="startMenu">determinate if startMenu is enabled o disabled.By default it is true</param>
+    /// <param name="optionMenu">determinate if optionMenu is enabled o disabled.By default it is false</param>
+    /// <param name="inGameMenu">determinate if inGame view is enabled o disabled.By default it is false</param>
+    /// <param name="endOfGameMenu">determinate if end of game view is enabled o disabled.By default it is false</param>
+
+    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, bool endOfGameMenu = false)
+    {
+        startMenuCanvas.enabled = startMenu;
+        this.optionMenu.enabled = optionMenu;
+        inGameCanvas.enabled = inGameMenu;
+        endOfGameCanvas.enabled = endOfGameMenu;
+    }
 
     /// <summary>
     /// Incress the score point in code
