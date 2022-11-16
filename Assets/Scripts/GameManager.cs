@@ -24,14 +24,19 @@ public class GameManager : MonoBehaviour
 
     public static GameManager sharedInstance;
     private GameState currentGameState = GameState.startMenu;
+    private GameState prevGameState;
     [SerializeField]  private Canvas startMenuCanvas;
     [SerializeField]  private Canvas optionMenu;
     [SerializeField]  private Canvas inGameCanvas;
     [SerializeField]  private Canvas endOfGameCanvas;
+    private bool breakEndGame;
     private int points = 0;
 
 
+    private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
+    private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
     private void Awake()
+
     {
         sharedInstance = this;
     }
@@ -47,7 +52,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0)
+        if (SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0 && BreakEndGame == false)
         {
             EndGame();
         }
@@ -66,12 +71,32 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// This function is called when a player press the button back in the option menu.
+    /// </summary>
+
+    public void ComeBackToStarMenu()
+    {
+        if(PrevGameState == GameState.endOfGame)
+        {
+            ChangeGameState(GameState.endOfGame);
+            BreakEndGame = false;
+        }
+
+        ChangeGameState(GameState.startMenu);
+    }
+
+    /// <summary>
     /// Call the method to change state with option menu state
     /// </summary>
 
 
     public void OpenOptionMenu()
     {
+        if (GetGameState() == GameState.endOfGame)
+        {
+            PrevGameState = GameState.endOfGame;
+            BreakEndGame = true;
+        }
         ChangeGameState(GameState.optionMenu);
     }
 
