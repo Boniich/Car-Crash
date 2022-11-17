@@ -25,16 +25,20 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
     private GameState currentGameState = GameState.startMenu;
     private GameState prevGameState;
+    private SaveMaxScore maxScore = new SaveMaxScore();
     [SerializeField]  private Canvas startMenuCanvas;
     [SerializeField]  private Canvas optionMenu;
     [SerializeField]  private Canvas inGameCanvas;
     [SerializeField]  private Canvas endOfGameCanvas;
     private bool breakEndGame;
     private int points = 0;
+    private bool notAddToMaxScore = false;
 
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
     private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
+
+    private bool NotAddToMaxScore { get => notAddToMaxScore; set => notAddToMaxScore = value; }
     private void Awake()
 
     {
@@ -68,6 +72,7 @@ public class GameManager : MonoBehaviour
         SpawnManager.sharedInstance.SpawnRandomObstacules();
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
         ViewInGame.sharedInstance.UpdateMaxScoreText();
+        NotAddToMaxScore = false;
     }
 
     /// <summary>
@@ -110,7 +115,11 @@ public class GameManager : MonoBehaviour
 
         ChangeGameState(GameState.endOfGame);
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
-        ViewInGame.sharedInstance.SetMaxScoreText(points);
+        if (!NotAddToMaxScore)
+        {
+            maxScore.SetMaxScoreValue(points);
+        }
+        
         ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
     }
 
@@ -213,6 +222,21 @@ public class GameManager : MonoBehaviour
         points += pointsAmount;
         ViewInGame.sharedInstance.UpdatePointLabel();
 
+    }
+
+    /// <summary>
+    /// Reset the maxScore
+    /// </summary>
+
+    public void ResetMaxScore()
+    {
+        maxScore.ResetMaxScore();
+
+        if(PrevGameState == GameState.endOfGame)
+        {  
+            ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
+            NotAddToMaxScore = true;
+        }
     }
 
 }
