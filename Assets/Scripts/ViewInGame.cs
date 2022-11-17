@@ -6,7 +6,7 @@ using UnityEngine;
 public class ViewInGame : MonoBehaviour
 {
     public static ViewInGame sharedInstance;
-
+    private SaveMaxScore maxScore = new SaveMaxScore();
     [SerializeField]  private TextMeshProUGUI scoreTextPoint;
     [SerializeField]  private TextMeshProUGUI maxScoreText;
     [SerializeField]  private TextMeshProUGUI obstaculeCountText;
@@ -22,21 +22,7 @@ public class ViewInGame : MonoBehaviour
     /// </summary>
     public void UpdateMaxScoreText()
     {
-        maxScoreText.text = PlayerPrefs.GetInt("maxScore").ToString();
-    }
-
-    /// <summary>
-    /// Check if the new score point obtained by player is higher than the old max score point
-    /// </summary>
-    /// <param name="points"> It get the score point obteined in the gameplay by player</param>
-
-    public void SetMaxScoreText(int points)
-    {
-
-        if(PlayerPrefs.GetInt("maxScore") < points)
-        {
-           PlayerPrefs.SetInt("maxScore", points);
-        }
+        maxScoreText.text = maxScore.GetMaxScoreString();
     }
 
     /// <summary>

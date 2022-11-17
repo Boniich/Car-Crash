@@ -8,6 +8,7 @@ public class ViewEndOfGame : MonoBehaviour
 {
 
     public static ViewEndOfGame sharedInstance;
+    private SaveMaxScore maxScore = new SaveMaxScore();
     [SerializeField] private TextMeshProUGUI endScorePointText;
     [SerializeField] private TextMeshProUGUI maxScorePointText;
     // Start is called before the first frame update
@@ -21,7 +22,7 @@ public class ViewEndOfGame : MonoBehaviour
     /// </summary>
     public void UpdateMaxScoreText()
     {
-        maxScorePointText.text = PlayerPrefs.GetInt("maxScore").ToString();
+        maxScorePointText.text = maxScore.GetMaxScoreString();
     }
     /// <summary>
     /// Update the score point in the view of endGame
