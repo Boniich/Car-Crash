@@ -4757,7 +4757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 558870001}
-  offset: {x: 0, y: 5, z: -8}
+  offset: {x: 0, y: 5, z: -12}
 --- !u!1001 &546747555
 PrefabInstance:
   m_ObjectHideFlags: 0
