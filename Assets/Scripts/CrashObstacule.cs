@@ -16,6 +16,7 @@ public class CrashObstacule : MonoBehaviour
     private void Start()
     {
         PointsLabel.text = ObstaculePoints.ToString();
+        PointsLabel.enabled = false;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -23,12 +24,17 @@ public class CrashObstacule : MonoBehaviour
     
         if (collision.tag == "Player")
         { 
-            Destroy(gameObject);
-            SpawnManager.sharedInstance.ObstaculeDiscount();
-            GameManager.sharedInstance.GainPoints(ObstaculePoints);
-            ViewInGame.sharedInstance.UpdateObstaculeCountText();
-          
+            PointsLabel.enabled = true;
+            Invoke("DestroyObject", 0.5f);
         }
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+        SpawnManager.sharedInstance.ObstaculeDiscount();
+        GameManager.sharedInstance.GainPoints(ObstaculePoints);
+        ViewInGame.sharedInstance.UpdateObstaculeCountText();
     }
 
 
