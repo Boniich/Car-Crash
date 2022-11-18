@@ -62,6 +62,13 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    /// <summary>
+    /// Exit from game
+    /// </summary>
+    public void Exit()
+    {
+        Application.Quit();
+    }
 
     /// <summary>
     /// Start the game when player press the button "Start"
