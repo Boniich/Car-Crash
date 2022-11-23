@@ -65,12 +65,11 @@ public class PlayerController : MonoBehaviour
 
                 if (horizontal != 0)
                 {
-                    _rigidbody.AddTorque(Vector3.up * turnSpeed * horizontal, ForceMode.Acceleration);
+                    _rigidbody.AddForce(Vector3.up * speed * horizontal, ForceMode.Acceleration);
+                    //_rigidbody.AddTorque(Vector3.up * turnSpeed * horizontal, ForceMode.Acceleration);
                 }
 
-            }
-
-            else
+            }else
             {
                 if (vertical != 0) transform.Translate(speed * Time.deltaTime * Vector3.forward * vertical);
                 if (horizontal != 0) transform.Rotate(turnSpeed * Time.deltaTime * Vector3.up * horizontal);
