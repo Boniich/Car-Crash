@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private Canvas optionMenu;
     [SerializeField]  private Canvas inGameCanvas;
     [SerializeField]  private Canvas endOfGameCanvas;
+    public Canvas windoToConfirmResetMaxScore;
+    public Canvas successfullResetWindow;
     private bool breakEndGame;
     private int points = 0;
     private bool notAddToMaxScore = false;
@@ -203,12 +205,14 @@ public class GameManager : MonoBehaviour
     /// <param name="inGameMenu">determinate if inGame view is enabled o disabled.By default it is false</param>
     /// <param name="endOfGameMenu">determinate if end of game view is enabled o disabled.By default it is false</param>
 
-    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, bool endOfGameMenu = false)
+    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, bool endOfGameMenu = false, bool windowToResetMaxScore = false, bool successfullResetWindow = false)
     {
         startMenuCanvas.enabled = startMenu;
         this.optionMenu.enabled = optionMenu;
         inGameCanvas.enabled = inGameMenu;
         endOfGameCanvas.enabled = endOfGameMenu;
+        windoToConfirmResetMaxScore.enabled = windowToResetMaxScore;
+        this.successfullResetWindow.enabled = successfullResetWindow; 
     }
     /// <summary>
     /// Return the value of variable points
@@ -231,6 +235,16 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ToggleMaxScoreResetWindow()
+    {
+        windoToConfirmResetMaxScore.enabled = !windoToConfirmResetMaxScore.enabled;
+    }
+
+    public void CloseSuccefullResetWindow()
+    {
+        successfullResetWindow.enabled = false;
+    }
+
     /// <summary>
     /// Reset the maxScore
     /// </summary>
@@ -244,6 +258,10 @@ public class GameManager : MonoBehaviour
             ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
             NotAddToMaxScore = true;
         }
+
+        windoToConfirmResetMaxScore.enabled = false;
+        // activar una ventana de que se borro con exito
+        successfullResetWindow.enabled = true;
     }
 
 }
