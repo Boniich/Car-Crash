@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager sharedInstance;
-    private GameState currentGameState = GameState.startMenu;
+    [SerializeField]  private GameState currentGameState = GameState.startMenu;
     private GameState prevGameState;
     private SaveMaxScore maxScore = new SaveMaxScore();
+    private SaveAudioProcess audioProcess = new SaveAudioProcess();
     [SerializeField]  private Canvas startMenuCanvas;
     [SerializeField]  private Canvas optionMenu;
     [SerializeField]  private Canvas inGameCanvas;
@@ -59,15 +60,15 @@ public class GameManager : MonoBehaviour
         myAudio = Camera.main.GetComponent<AudioSource>();
         myScrollBar = optionMenu.GetComponentInChildren<Scrollbar>();
         myToggle = optionMenu.GetComponentInChildren<Toggle>();
-        myScrollBar.value = myAudio.volume;
-        myToggle.isOn = myAudio.mute;
+        myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
+        myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         HandleViewActivation();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         if (SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0 && BreakEndGame == false)
         {
             EndGame();
@@ -279,49 +280,6 @@ public class GameManager : MonoBehaviour
     public void ScrollMusicVolumen()
     {
         myAudio.volume = myScrollBar.value;
-
-        if(myScrollBar.value == 0)
-        {
-            ToggleMuteMusic(true);
-        }else if(myScrollBar.value > 0.004)
-        {
-            ToggleMuteMusic(false);
-        }
-        
+        audioProcess.SaveScrollBackgroundMusic(myAudio.volume);
     }
-
-    public void ScrollMusicVolumen(float newValue)
-    {
-        myAudio.volume = newValue;
-        myScrollBar.value = newValue;
-    }
-
-    /// <summary>
-    /// Make a toggle to active and deactivate music background
-    /// </summary>
-    public void ToggleMuteMusic()
-    {
-       myToggle.isOn = !myAudio.mute;
-       myAudio.mute = !myAudio.mute;
-        
-        if (myAudio.mute) 
-        {
-            ScrollMusicVolumen(0);
-        }
-        else
-        {
-            ScrollMusicVolumen(0.5f);
-        }
-    }
-
-    /// <summary>
-    /// Make a toggle to active and deactivate music background
-    /// </summary>
-    /// <param name="active">Can be true o false. It determinate if mute will active or not</param>
-    public void ToggleMuteMusic(bool active)
-    {
-        myToggle.isOn = active;
-        myAudio.mute = active;
-    }
-
 }
