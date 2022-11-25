@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,7 +45,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-   
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.sharedInstance.TogglePauseMenu();
+        }
+
+
         if (GameManager.sharedInstance.GetGameState() == GameState.inGame)
         {
   
@@ -52,6 +59,7 @@ public class PlayerController : MonoBehaviour
             horizontal = Input.GetAxis("Horizontal");
 
             RestrictPlayerMovement();
+
 
             if (enablePhysicsEngine)
             {

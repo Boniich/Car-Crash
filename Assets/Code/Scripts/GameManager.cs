@@ -17,7 +17,8 @@ public enum GameState
     //carSelect,
     optionMenu,
     inGame,
-    endOfGame
+    endOfGame,
+    pauseMenu
 }
 
 public class GameManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private Canvas optionMenu;
     [SerializeField]  private Canvas inGameCanvas;
     [SerializeField]  private Canvas endOfGameCanvas;
+    [SerializeField]  private Canvas pauseMenu;
     public Canvas windoToConfirmResetMaxScore;
     public Canvas successfullResetWindow;
     private bool breakEndGame;
@@ -201,6 +203,9 @@ public class GameManager : MonoBehaviour
         } else if (newGameState == GameState.endOfGame)
         {
             HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: true);
+        } else if(newGameState == GameState.pauseMenu)
+        {
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, windowToResetMaxScore: false, successfullResetWindow: false, pauseMenu: true);
         }
 
 
@@ -217,14 +222,15 @@ public class GameManager : MonoBehaviour
     /// <param name="inGameMenu">determinate if inGame view is enabled o disabled.By default it is false</param>
     /// <param name="endOfGameMenu">determinate if end of game view is enabled o disabled.By default it is false</param>
 
-    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, bool endOfGameMenu = false, bool windowToResetMaxScore = false, bool successfullResetWindow = false)
+    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, bool endOfGameMenu = false, bool windowToResetMaxScore = false, bool successfullResetWindow = false,bool pauseMenu = false)
     {
         startMenuCanvas.enabled = startMenu;
         this.optionMenu.enabled = optionMenu;
         inGameCanvas.enabled = inGameMenu;
         endOfGameCanvas.enabled = endOfGameMenu;
         windoToConfirmResetMaxScore.enabled = windowToResetMaxScore;
-        this.successfullResetWindow.enabled = successfullResetWindow; 
+        this.successfullResetWindow.enabled = successfullResetWindow;
+        this.pauseMenu.enabled = pauseMenu;
     }
     /// <summary>
     /// Return the value of variable points
@@ -281,5 +287,33 @@ public class GameManager : MonoBehaviour
     {
         myAudio.volume = myScrollBar.value;
         audioProcess.SaveScrollBackgroundMusic(myAudio.volume);
+    }
+
+    public void ComeBackToPlay()
+    {
+        ChangeGameState(GameState.inGame);
+    }
+
+
+    /// <summary>
+    /// Open and close pause menu with ESC
+    /// </summary>
+
+    public void TogglePauseMenu()
+    {
+        if (GetGameState() == GameState.inGame || GetGameState() == GameState.pauseMenu)
+        {
+ 
+                if (GetGameState() != GameState.pauseMenu)
+                {
+                    ChangeGameState(GameState.pauseMenu);
+
+                }
+                else if (GetGameState() == GameState.pauseMenu)
+                {
+                    ComeBackToPlay();
+                }
+
+        }
     }
 }
