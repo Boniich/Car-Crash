@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private GameState prevGameState;
     private SaveMaxScore maxScore = new SaveMaxScore();
     private SaveAudioProcess audioProcess = new SaveAudioProcess();
+    private Points points = new Points();
     [SerializeField]  private Canvas startMenuCanvas;
     [SerializeField]  private Canvas optionMenu;
     [SerializeField]  private Canvas inGameCanvas;
@@ -37,7 +38,6 @@ public class GameManager : MonoBehaviour
     public Canvas windoToConfirmResetMaxScore;
     public Canvas successfullResetWindow;
     private bool breakEndGame;
-    private int points = 0;
     private bool notAddToMaxScore = false;
     private AudioSource myAudio;
     private Scrollbar myScrollBar;
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
         if (!NotAddToMaxScore)
         {
-            maxScore.SetMaxScoreValue(points);
+            maxScore.SetMaxScoreValue(points.GetPoints());
         }
         
         ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
@@ -162,20 +162,9 @@ public class GameManager : MonoBehaviour
         SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
         PlayerController.sharedInstance.ResetPlayerPosition();
         StartGame();
-        ResetPoints();
+        points.ResetPoints();
 
     }
-
-    /// <summary>
-    /// Reset the point for each gameplay
-    /// </summary>
-
-    private void ResetPoints()
-    {
-        points = 0;
-        ViewInGame.sharedInstance.UpdatePointLabel();
-    }
-
 
     /// <summary>
     /// Return the current state of game
@@ -247,7 +236,7 @@ public class GameManager : MonoBehaviour
 
     public int GetPoints()
     {
-        return points;
+        return points.GetPoints();
     }
 
     /// <summary>
@@ -256,9 +245,7 @@ public class GameManager : MonoBehaviour
     /// <param name="pointsAmount">Recibe diferent value depedding to value of obstacule</param>
     public void GainPoints(int pointsAmount)
     {
-        points += pointsAmount;
-        ViewInGame.sharedInstance.UpdatePointLabel();
-     
+        points.GainPoints(pointsAmount);
     }
 
     public void ToggleMaxScoreResetWindow()
