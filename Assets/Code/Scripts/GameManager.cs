@@ -108,8 +108,16 @@ public class GameManager : MonoBehaviour
             ChangeGameState(GameState.endOfGame);
             BreakEndGame = false;
         }
+        else if(PrevGameState == GameState.inGame)
+        {
+            ChangeGameState(GameState.pauseMenu);
+        }
+        else
+        {
+            ChangeGameState(GameState.startMenu);
+        }
 
-        ChangeGameState(GameState.startMenu);
+        
     }
 
     /// <summary>
@@ -307,6 +315,7 @@ public class GameManager : MonoBehaviour
                 if (GetGameState() != GameState.pauseMenu)
                 {
                     ChangeGameState(GameState.pauseMenu);
+                    PrevGameState = GameState.inGame;
 
                 }
                 else if (GetGameState() == GameState.pauseMenu)
