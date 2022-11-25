@@ -23,7 +23,7 @@ public class CrashObstacule : MonoBehaviour
     {
     
         if (collision.tag == "Player")
-        { 
+        {
             PointsLabel.enabled = true;
             Invoke("DestroyObject", 0.5f);
         }
