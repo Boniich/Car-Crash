@@ -277,17 +277,18 @@ public class GameManager : MonoBehaviour
 
     public void ResetMaxScore()
     {
-        maxScore.ResetMaxScore();
+            maxScore.ResetMaxScore();
 
-        if(PrevGameState == GameState.endOfGame)
-        {  
-            ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
-            NotAddToMaxScore = true;
-        }
+            if (PrevGameState == GameState.endOfGame)
+            {
+                ViewEndOfGame.sharedInstance.UpdateMaxScoreText();
+                NotAddToMaxScore = true;
+            }
 
-        windoToConfirmResetMaxScore.enabled = false;
-        // activar una ventana de que se borro con exito
-        successfullResetWindow.enabled = true;
+            windoToConfirmResetMaxScore.enabled = false;
+            // activar una ventana de que se borro con exito
+            successfullResetWindow.enabled = true;
+            ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
 
 
