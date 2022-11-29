@@ -1,8 +1,4 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPlayerPosition;
     private Vector3 recalculatePlayerPosition = new Vector3(0, 0, 0);
 
-
+    
 
     void Awake()
     {
@@ -60,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
             RestrictPlayerMovement();
 
-
+            
             if (enablePhysicsEngine)
             {
 
@@ -84,7 +80,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
-
+            
 
         }
 
