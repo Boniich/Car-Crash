@@ -59,7 +59,15 @@ public class SpawnManager : MonoBehaviour
 
     public void ResetDestroyedObstaculeCount()
     {
-        if(destroyObstaculeCount == 0) destroyObstaculeCount = obstaculeCount;
+        if(destroyObstaculeCount == 0 || GameManager.sharedInstance.GetGameState() == GameState.gameOver) destroyObstaculeCount = obstaculeCount;
+    }
+
+    public void DestroyAllOldObstacules()
+    {
+        for (int e = 0; e < GameObject.FindGameObjectsWithTag("Obstacule").Length; e++)
+        {
+            Destroy(GameObject.FindGameObjectsWithTag("Obstacule")[e]);
+        }
     }
 
     /// <summary>

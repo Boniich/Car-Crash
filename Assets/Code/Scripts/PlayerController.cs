@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [Range(0, 50), SerializeField] private float speed = 0.0f;
     [Range(0, 50), SerializeField] private float turnSpeed = 0.0f;
-    private int resistence = 50;
+    private int resistence = 100;
     [SerializeField] private bool enablePhysicsEngine;
 
 
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetResistence()
     {
-        Resistence = 50;
+        Resistence = 100;
     }
 
 

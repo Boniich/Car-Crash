@@ -19,6 +19,7 @@ public enum GameState
     inGame,
     endOfGame,
     pauseMenu,
+    gameOver
 }
 
 public class GameManager : MonoBehaviour
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private Canvas inGameCanvas;
     [SerializeField]  private Canvas endOfGameCanvas;
     [SerializeField]  private Canvas pauseMenu;
+    [SerializeField]  private Canvas gameOverView;
     public Canvas windoToConfirmResetMaxScore;
     public Canvas successfullResetWindow;
     private bool breakEndGame;
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
 
         if(PlayerController.sharedInstance.Resistence == 0)
         {
-            Debug.Log("GAME OVER!");
+            GameOver();
         }
         
         if (SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0 && BreakEndGame == false)
@@ -164,6 +166,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayAgain()
     {
+
+        SpawnManager.sharedInstance.DestroyAllOldObstacules();
         SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
         PlayerController.sharedInstance.ResetPlayerPosition();
         PlayerController.sharedInstance.ResetResistence();
@@ -180,6 +184,11 @@ public class GameManager : MonoBehaviour
     public GameState GetGameState()
     {
         return currentGameState;
+    }
+
+    private void GameOver()
+    {
+        ChangeGameState(GameState.gameOver);
     }
 
 
@@ -209,6 +218,9 @@ public class GameManager : MonoBehaviour
         } else if(newGameState == GameState.pauseMenu)
         {
             HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, windowToResetMaxScore: false, successfullResetWindow: false, pauseMenu: true);
+        }else if(newGameState == GameState.gameOver)
+        {
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, windowToResetMaxScore: false, successfullResetWindow: false, pauseMenu: false, gameOverView: true);
         }
 
 
@@ -227,7 +239,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, 
         bool endOfGameMenu = false, bool windowToResetMaxScore = false, 
-        bool successfullResetWindow = false,bool pauseMenu = false)
+        bool successfullResetWindow = false,bool pauseMenu = false, bool gameOverView = false)
     {
         startMenuCanvas.enabled = startMenu;
         this.optionMenu.enabled = optionMenu;
@@ -236,6 +248,7 @@ public class GameManager : MonoBehaviour
         windoToConfirmResetMaxScore.enabled = windowToResetMaxScore;
         this.successfullResetWindow.enabled = successfullResetWindow;
         this.pauseMenu.enabled = pauseMenu;
+        this.gameOverView.enabled = gameOverView;
     }
     /// <summary>
     /// Return the value of variable points
