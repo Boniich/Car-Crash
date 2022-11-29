@@ -159,8 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce91dde6bea9bc409952a447fa8c2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaculePoints: 15
+  obstaculePoints: 5
   pointsLabel: {fileID: 2376892147789446744}
+  damage: 3
 --- !u!1001 &2922723842872795684
 PrefabInstance:
   m_ObjectHideFlags: 0
