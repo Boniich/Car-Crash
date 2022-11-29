@@ -18,7 +18,7 @@ public enum GameState
     optionMenu,
     inGame,
     endOfGame,
-    pauseMenu
+    pauseMenu,
 }
 
 public class GameManager : MonoBehaviour
@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(PlayerController.sharedInstance.Resistence == 0)
+        {
+            Debug.Log("GAME OVER!");
+        }
         
         if (SpawnManager.sharedInstance.GetDestroyedObstaculeCount() == 0 && BreakEndGame == false)
         {
@@ -161,6 +166,7 @@ public class GameManager : MonoBehaviour
     {
         SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
         PlayerController.sharedInstance.ResetPlayerPosition();
+        PlayerController.sharedInstance.ResetResistence();
         StartGame();
         points.ResetPoints();
 
@@ -219,7 +225,9 @@ public class GameManager : MonoBehaviour
     /// <param name="inGameMenu">determinate if inGame view is enabled o disabled.By default it is false</param>
     /// <param name="endOfGameMenu">determinate if end of game view is enabled o disabled.By default it is false</param>
 
-    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, bool endOfGameMenu = false, bool windowToResetMaxScore = false, bool successfullResetWindow = false,bool pauseMenu = false)
+    private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, 
+        bool endOfGameMenu = false, bool windowToResetMaxScore = false, 
+        bool successfullResetWindow = false,bool pauseMenu = false)
     {
         startMenuCanvas.enabled = startMenu;
         this.optionMenu.enabled = optionMenu;

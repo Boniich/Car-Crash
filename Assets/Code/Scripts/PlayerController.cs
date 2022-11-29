@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [Range(0, 50), SerializeField] private float speed = 0.0f;
     [Range(0, 50), SerializeField] private float turnSpeed = 0.0f;
-
+    private int resistence = 50;
     [SerializeField] private bool enablePhysicsEngine;
 
 
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPlayerPosition;
     private Vector3 recalculatePlayerPosition = new Vector3(0, 0, 0);
 
+    public int Resistence { get => resistence; set => resistence = value; }
+
     
 
     void Awake()
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         startPlayerPosition = transform.position;
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -40,7 +43,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -134,6 +136,11 @@ public class PlayerController : MonoBehaviour
     public void ResetPlayerPosition()
     {
         transform.position = startPlayerPosition;
+    }
+
+    public void ResetResistence()
+    {
+        Resistence = 50;
     }
 
 
