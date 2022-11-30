@@ -8,14 +8,20 @@ public class CrashObstacule : MonoBehaviour
    
      [SerializeField] private int obstaculePoints;
      [SerializeField] private TextMeshPro pointsLabel;
-     public int damage;
-     private int totalDamage = 0;
+     [SerializeField] private int impactDamage;
+     private int totalImpactDamage = 0;
+     int[] randomDamageValues = { 0, 3 };
 
 
-    public int ObstaculePoints { get { return obstaculePoints; } }
-    public TextMeshPro PointsLabel { get { return pointsLabel; } }
+    private int ObstaculePoints { get { return obstaculePoints; } }
+    private TextMeshPro PointsLabel { get { return pointsLabel; } }
 
-    public int TotalDamage { get => totalDamage; set => totalDamage = value; }
+    private int ImpactDamage { get => impactDamage;}
+
+
+    private int TotalImpactDamage { get => totalImpactDamage; set => totalImpactDamage = value; }
+
+
 
     private void Start()
     {
@@ -39,7 +45,7 @@ public class CrashObstacule : MonoBehaviour
     /// Destroy and update UI after each time time that an object is destroyed
     /// </summary>
 
-    public void DestroyObject()
+    private void DestroyObject()
     {
         
         ReduceResistence();
@@ -48,7 +54,7 @@ public class CrashObstacule : MonoBehaviour
         GameManager.sharedInstance.GainPoints(ObstaculePoints);
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
         ViewInGame.sharedInstance.UpdateResistenceCount();
-        ViewInGame.sharedInstance.UpdateImpactDamage(TotalDamage);
+        ViewInGame.sharedInstance.UpdateImpactDamage(TotalImpactDamage);
 
     }
 
@@ -56,19 +62,19 @@ public class CrashObstacule : MonoBehaviour
     /// Reduce resistence of car each time that player impact with and object
     /// </summary>
 
-    public void ReduceResistence()
+    private void ReduceResistence()
     {
         int resistence = PlayerController.sharedInstance.Resistence;
-        int randomDamage = Random.Range(0, 3);
-        TotalDamage = damage + randomDamage;
+        int randomImpactDamage = Random.Range(randomDamageValues[0], randomDamageValues[1]);
+        TotalImpactDamage = ImpactDamage + randomImpactDamage;
 
-        if((resistence -= totalDamage) <= 0)
+        if((resistence -= TotalImpactDamage) <= 0)
         {
             PlayerController.sharedInstance.Resistence = 0;
         }
         else
         {
-            PlayerController.sharedInstance.Resistence -= TotalDamage;
+            PlayerController.sharedInstance.Resistence -= TotalImpactDamage;
         }
     }
 

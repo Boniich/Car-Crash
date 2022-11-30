@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaculePoints: 5
   pointsLabel: {fileID: 2376892147789446744}
-  damage: 3
+  impactDamage: 3
 --- !u!1001 &2922723842872795684
 PrefabInstance:
   m_ObjectHideFlags: 0

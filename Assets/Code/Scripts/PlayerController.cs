@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 50), SerializeField] private float speed = 0.0f;
     [Range(0, 50), SerializeField] private float turnSpeed = 0.0f;
     private int resistence = 100;
+    private int initialResistence;
     [SerializeField] private bool enablePhysicsEngine;
 
 
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public int Resistence { get => resistence; set => resistence = value; }
 
+    private int InitialResistence { get => initialResistence; set => initialResistence = value; }
+
     
 
     void Awake()
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
         
         startPlayerPosition = transform.position;
         _rigidbody = GetComponent<Rigidbody>();
+        InitialResistence = Resistence;
     }
 
     // Update is called once per frame
@@ -143,7 +147,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void ResetResistence()
     {
-        Resistence = 100;
+        Resistence = InitialResistence;
     }
 
 

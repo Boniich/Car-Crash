@@ -78,11 +78,11 @@ public class ViewInGame : MonoBehaviour
     /// </summary>
     /// <param name="totalDamage">damege caused at momento to impact</param>
 
-    public void UpdateImpactDamage(int totalDamage)
+    public void UpdateImpactDamage(int totalImpactDamage)
     {
 
         ChangeColorSubResistencePanel(impactColor);
-        impactDamage.text = "- " + totalDamage.ToString();
+        impactDamage.text = "- " + totalImpactDamage.ToString();
     }
 
     /// <summary>
