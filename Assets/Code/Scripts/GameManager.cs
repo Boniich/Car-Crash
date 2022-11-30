@@ -187,6 +187,9 @@ public class GameManager : MonoBehaviour
         return currentGameState;
     }
 
+    /// <summary>
+    /// Change the state of game at GameOver
+    /// </summary>
     private void GameOver()
     {
         ChangeGameState(GameState.gameOver);
@@ -270,10 +273,18 @@ public class GameManager : MonoBehaviour
         points.GainPoints(pointsAmount);
     }
 
+    /// <summary>
+    /// Enabled and disabled popup window to reset max score
+    /// </summary>
+
     public void ToggleMaxScoreResetWindow()
     {
         windoToConfirmResetMaxScore.enabled = !windoToConfirmResetMaxScore.enabled;
     }
+
+    /// <summary>
+    /// Close the succefull popup window when max score is reseted
+    /// </summary>
 
     public void CloseSuccefullResetWindow()
     {
@@ -301,11 +312,19 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Handle the volumen of background music using the scroll bar
+    /// </summary>
+
     public void ScrollMusicVolumen()
     {
         myAudio.volume = myScrollBar.value;
         audioProcess.SaveScrollBackgroundMusic(myAudio.volume);
     }
+
+    /// <summary>
+    /// Change the state to play after use pause menu
+    /// </summary>
 
     public void ComeBackToPlay()
     {

@@ -62,6 +62,10 @@ public class SpawnManager : MonoBehaviour
         if(destroyObstaculeCount == 0 || GameManager.sharedInstance.GetGameState() == GameState.gameOver) destroyObstaculeCount = obstaculeCount;
     }
 
+    /// <summary>
+    /// Destroy al Object when the game ends
+    /// </summary>
+
     public void DestroyAllOldObstacules()
     {
         for (int e = 0; e < GameObject.FindGameObjectsWithTag("Obstacule").Length; e++)

@@ -35,6 +35,10 @@ public class CrashObstacule : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroy and update UI after each time time that an object is destroyed
+    /// </summary>
+
     public void DestroyObject()
     {
         
@@ -47,6 +51,10 @@ public class CrashObstacule : MonoBehaviour
         ViewInGame.sharedInstance.UpdateImpactDamage(TotalDamage);
 
     }
+
+    /// <summary>
+    /// Reduce resistence of car each time that player impact with and object
+    /// </summary>
 
     public void ReduceResistence()
     {

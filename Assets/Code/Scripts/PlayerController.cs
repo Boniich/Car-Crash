@@ -138,6 +138,9 @@ public class PlayerController : MonoBehaviour
         transform.position = startPlayerPosition;
     }
 
+    /// <summary>
+    /// Reset Resistence
+    /// </summary>
     public void ResetResistence()
     {
         Resistence = 100;
