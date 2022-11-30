@@ -14,8 +14,11 @@ public class ViewInGame : MonoBehaviour
     [SerializeField]  private TextMeshProUGUI resistenceCount;
     [SerializeField]  private TextMeshProUGUI impactDamage;
     private GameObject subResistentePanel;
+    private GameObject resistenceIsFullWindow;
+    private float timeToDisableResistenceIsFullWindow = 3f;
     private Image imageComponent;
     private Color impactColor = new Color(0.9333333f, 0.1176471f, 0.1176471f, 0.3921569f); //HEX: EE1E1E
+    private Color recuperateColor = new Color(0f, 0.5019608f, 0.2156863f, 0.3921569f); //HEX: 008037
     // Start is called before the first frame update
 
     private void Awake()
@@ -26,8 +29,10 @@ public class ViewInGame : MonoBehaviour
     private void Start()
     {
         subResistentePanel = GameObject.FindGameObjectWithTag("SubResistencePanel");
-
         imageComponent = subResistentePanel.GetComponent<Image>();
+
+        resistenceIsFullWindow = GameObject.FindGameObjectWithTag("ResistenceIsFullWindow");
+        ToggleResistenceIsFullWindow(false);
     }
 
     /// <summary>
@@ -75,12 +80,53 @@ public class ViewInGame : MonoBehaviour
 
     public void UpdateImpactDamage(int totalDamage)
     {
- 
-        if (imageComponent.color != impactColor)
-        {
-            imageComponent.color = impactColor;
-        }
-        
+
+        ChangeColorSubResistencePanel(impactColor);
         impactDamage.text = "- " + totalDamage.ToString();
+    }
+
+    /// <summary>
+    /// Update the sub resistence panel when player recuperate resistence
+    /// </summary>
+    /// <param name="resistenceRecuperate"></param>
+
+    public void UpdateRecuperateResistence(int resistenceRecuperate)
+    {
+        ChangeColorSubResistencePanel(recuperateColor);
+        impactDamage.text = "+ " + resistenceRecuperate.ToString();
+    }
+
+    /// <summary>
+    /// Change the color of sub resistence panel
+    /// </summary>
+    /// <param name="color">color in which the panel will change</param>
+
+    private void ChangeColorSubResistencePanel(Color color)
+    {
+        if (imageComponent.color != color)
+        {
+            imageComponent.color = color;
+        }
+    }
+
+    /// <summary>
+    /// Active or desactive the window that show if the resistence is full to use the recuperacion
+    /// </summary>
+    /// <param name="enabled"></param>
+
+    public void ToggleResistenceIsFullWindow(bool enabled)
+    {
+        resistenceIsFullWindow.SetActive(enabled);
+    }
+
+    /// <summary>
+    /// Corrutine: Wait 'x' time to disable the resistence is full window
+    /// </summary>
+    /// <returns></returns>
+
+    public IEnumerator CloseResistenceIsfullWindow()
+    {
+        yield return new WaitForSeconds(timeToDisableResistenceIsFullWindow);
+        ViewInGame.sharedInstance.ToggleResistenceIsFullWindow(false);
     }
 }

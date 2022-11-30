@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacule
   - SubResistencePanel
+  - ResistenceRecuperator
+  - ResistenceIsFullWindow
   layers:
   - Default
   - TransparentFX
