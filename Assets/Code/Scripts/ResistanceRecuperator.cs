@@ -7,6 +7,7 @@ public class ResistanceRecuperator : MonoBehaviour
 
     [SerializeField] private int recuperateResistence;
     private int minResistenceToRecuperate = 99;
+    private float timeObjectRotation = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class ResistanceRecuperator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(timeObjectRotation * Time.deltaTime * Vector3.up);
     }
 
     private void OnTriggerEnter(Collider other)
