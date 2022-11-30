@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         SpawnManager.sharedInstance.SpawnRandomObstacules();
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
         ViewInGame.sharedInstance.UpdateMaxScoreText();
+        ViewInGame.sharedInstance.UpdateResistenceCount();
         NotAddToMaxScore = false;
     }
 
