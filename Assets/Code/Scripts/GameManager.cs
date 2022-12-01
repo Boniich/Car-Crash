@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     private Scrollbar myScrollBar;
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
-    private GameObject exitPopup;
+    private GameObject[] exitPopup;
 
 
 
@@ -69,9 +69,9 @@ public class GameManager : MonoBehaviour
         myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
-        exitPopup = GameObject.FindGameObjectWithTag("ExitPopup");
+        exitPopup = GameObject.FindGameObjectsWithTag("ExitPopup");
         
-        Debug.Log(exitPopup);
+        Debug.Log(exitPopup.Length);
         HandleViewActivation();
     }
 
@@ -356,14 +356,70 @@ public class GameManager : MonoBehaviour
                 }
                 else if (GetGameState() == GameState.pauseMenu)
                 {
-                    ComeBackToPlay();
+
+                    if(ReturnPauseExitPopupState() == false)
+                    {
+                        ComeBackToPlay();
+                    }
+                    else
+                    {
+                        ClosePauseExitPopupState();
+                    }
                 }
 
         }
     }
 
-    public void ToggleExitPopUp(bool toggle)
+    
+
+    private const string START_EXIT_POPUP = "START_EXIT_POPUP";
+    private const string END_LEVEL_EXIT_POPUP = "END_LEVEL_EXIT_POPUP";
+    private const string PAUSE_EXIT_POPUP = "PAUSE_EXIT_POPUP";
+    private const string GAME_OVER_EXIT_POPUP = "GAME_OVER_EXIT_POPUP";
+
+    public void OpenExitPopUp(string exitPopUpOrder)
     {
-        exitPopup.GetComponent<Canvas>().enabled = toggle;
+        HandleExitPopUp(exitPopUpOrder, true);
+    }
+
+    public void CloseExitPopUp(string exitPopUpOrder)
+    {
+        HandleExitPopUp(exitPopUpOrder, false);
+    }
+
+    private void HandleExitPopUp(string exitPopUpOrder, bool toggle)
+    {
+
+        if (exitPopUpOrder == START_EXIT_POPUP)
+        {
+            ChangeExitPopupState(0, toggle);
+        }
+        else if (exitPopUpOrder == END_LEVEL_EXIT_POPUP)
+        {
+            ChangeExitPopupState(2, toggle);
+        }
+        else if (exitPopUpOrder == PAUSE_EXIT_POPUP)
+        {
+            ChangeExitPopupState(3, toggle);
+        }
+        else if (exitPopUpOrder == GAME_OVER_EXIT_POPUP)
+        {
+            ChangeExitPopupState(4, toggle);
+        }
+    }
+
+    public bool ReturnPauseExitPopupState()
+    {
+        return exitPopup[3].GetComponent<Canvas>().enabled;
+    }
+
+    public void ChangeExitPopupState(int arrayIndex, bool toggle)
+    {
+        exitPopup[arrayIndex].GetComponent<Canvas>().enabled = toggle;
+    }
+
+    public void ClosePauseExitPopupState()
+    {
+        ChangeExitPopupState(3, false);
     }
 }
