@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private Canvas endOfGameCanvas;
     [SerializeField]  private Canvas pauseMenu;
     [SerializeField]  private Canvas gameOverView;
-    public Canvas windoToConfirmResetMaxScore;
-    public Canvas successfullResetWindow;
     private bool breakEndGame;
     private bool notAddToMaxScore = false;
     private AudioSource myAudio;
@@ -46,6 +44,8 @@ public class GameManager : MonoBehaviour
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
     private GameObject[] exitPopup;
+    private GameObject resetMaxScorePopup;
+    private GameObject successMaxScoreResetPopup;
 
 
 
@@ -70,8 +70,9 @@ public class GameManager : MonoBehaviour
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
         exitPopup = GameObject.FindGameObjectsWithTag("ExitPopup");
-        
-        Debug.Log(exitPopup.Length);
+        resetMaxScorePopup = GameObject.FindGameObjectWithTag("ResetMaxScorePopup");
+        successMaxScoreResetPopup = GameObject.FindGameObjectWithTag("SuccessMaxScoreReset");
+
         HandleViewActivation();
     }
 
@@ -228,10 +229,10 @@ public class GameManager : MonoBehaviour
             HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: true);
         } else if(newGameState == GameState.pauseMenu)
         {
-            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, windowToResetMaxScore: false, successfullResetWindow: false, pauseMenu: true);
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, pauseMenu: true);
         }else if(newGameState == GameState.gameOver)
         {
-            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, windowToResetMaxScore: false, successfullResetWindow: false, pauseMenu: false, gameOverView: true);
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, pauseMenu: false, gameOverView: true);
         }
 
 
@@ -249,15 +250,12 @@ public class GameManager : MonoBehaviour
     /// <param name="endOfGameMenu">determinate if end of game view is enabled o disabled.By default it is false</param>
 
     private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, 
-        bool endOfGameMenu = false, bool windowToResetMaxScore = false, 
-        bool successfullResetWindow = false,bool pauseMenu = false, bool gameOverView = false)
+        bool endOfGameMenu = false,bool pauseMenu = false, bool gameOverView = false)
     {
         startMenuCanvas.enabled = startMenu;
         this.optionMenu.enabled = optionMenu;
         inGameCanvas.enabled = inGameMenu;
         endOfGameCanvas.enabled = endOfGameMenu;
-        windoToConfirmResetMaxScore.enabled = windowToResetMaxScore;
-        this.successfullResetWindow.enabled = successfullResetWindow;
         this.pauseMenu.enabled = pauseMenu;
         this.gameOverView.enabled = gameOverView;
     }
@@ -284,18 +282,19 @@ public class GameManager : MonoBehaviour
     /// Enabled and disabled popup window to reset max score
     /// </summary>
 
-    public void ToggleMaxScoreResetWindow()
+    public void ToggleMaxScoreResetWindow(bool toggle)
     {
-        windoToConfirmResetMaxScore.enabled = !windoToConfirmResetMaxScore.enabled;
+
+        resetMaxScorePopup.GetComponent<Canvas>().enabled = toggle;
     }
 
     /// <summary>
     /// Close the succefull popup window when max score is reseted
     /// </summary>
 
-    public void CloseSuccefullResetWindow()
+    public void ToggleSuccefullResetWindow(bool toggle)
     {
-        successfullResetWindow.enabled = false;
+        successMaxScoreResetPopup.GetComponent<Canvas>().enabled = toggle;
     }
 
     /// <summary>
@@ -312,9 +311,8 @@ public class GameManager : MonoBehaviour
                 NotAddToMaxScore = true;
             }
 
-            windoToConfirmResetMaxScore.enabled = false;
-            // activar una ventana de que se borro con exito
-            successfullResetWindow.enabled = true;
+            ToggleMaxScoreResetWindow(false);
+            ToggleSuccefullResetWindow(true);
             ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
 

@@ -9,6 +9,8 @@ TagManager:
   - ResistenceRecuperator
   - ResistenceIsFullWindow
   - ExitPopup
+  - ResetMaxScorePopup
+  - SuccessMaxScoreReset
   layers:
   - Default
   - TransparentFX
