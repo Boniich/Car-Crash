@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     private Scrollbar myScrollBar;
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
+    private GameObject exitPopup;
 
 
 
@@ -68,6 +69,9 @@ public class GameManager : MonoBehaviour
         myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
+        exitPopup = GameObject.FindGameObjectWithTag("ExitPopup");
+        
+        Debug.Log(exitPopup);
         HandleViewActivation();
     }
 
@@ -356,5 +360,10 @@ public class GameManager : MonoBehaviour
                 }
 
         }
+    }
+
+    public void ToggleExitPopUp(bool toggle)
+    {
+        exitPopup.GetComponent<Canvas>().enabled = toggle;
     }
 }

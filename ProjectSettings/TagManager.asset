@@ -8,6 +8,7 @@ TagManager:
   - SubResistencePanel
   - ResistenceRecuperator
   - ResistenceIsFullWindow
+  - ExitPopup
   layers:
   - Default
   - TransparentFX
