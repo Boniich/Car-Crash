@@ -43,11 +43,6 @@ public class GameManager : MonoBehaviour
     private Scrollbar myScrollBar;
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
-    private GameObject[] exitPopup;
-    private GameObject resetMaxScorePopup;
-    private GameObject successMaxScoreResetPopup;
-
-
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
     private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
@@ -69,10 +64,6 @@ public class GameManager : MonoBehaviour
         myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
-        exitPopup = GameObject.FindGameObjectsWithTag("ExitPopup");
-        resetMaxScorePopup = GameObject.FindGameObjectWithTag("ResetMaxScorePopup");
-        successMaxScoreResetPopup = GameObject.FindGameObjectWithTag("SuccessMaxScoreReset");
-
         HandleViewActivation();
     }
 
@@ -279,25 +270,6 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Enabled and disabled popup window to reset max score
-    /// </summary>
-
-    public void ToggleMaxScoreResetWindow(bool toggle)
-    {
-
-        resetMaxScorePopup.GetComponent<Canvas>().enabled = toggle;
-    }
-
-    /// <summary>
-    /// Close the succefull popup window when max score is reseted
-    /// </summary>
-
-    public void ToggleSuccefullResetWindow(bool toggle)
-    {
-        successMaxScoreResetPopup.GetComponent<Canvas>().enabled = toggle;
-    }
-
-    /// <summary>
     /// Reset the maxScore
     /// </summary>
 
@@ -311,8 +283,8 @@ public class GameManager : MonoBehaviour
                 NotAddToMaxScore = true;
             }
 
-            ToggleMaxScoreResetWindow(false);
-            ToggleSuccefullResetWindow(true);
+            PopupManager.sharedInstance.ToggleMaxScoreResetWindow(false);
+            PopupManager.sharedInstance.ToggleSuccefullResetWindow(true);
             ViewInGame.sharedInstance.UpdateMaxScoreText();
     }
 
@@ -355,69 +327,16 @@ public class GameManager : MonoBehaviour
                 else if (GetGameState() == GameState.pauseMenu)
                 {
 
-                    if(ReturnPauseExitPopupState() == false)
+                    if(PopupManager.sharedInstance.ReturnPauseExitPopupState() == false)
                     {
                         ComeBackToPlay();
                     }
                     else
                     {
-                        ClosePauseExitPopupState();
+                        PopupManager.sharedInstance.ClosePauseExitPopupState();
                     }
                 }
 
         }
-    }
-
-    
-
-    private const string START_EXIT_POPUP = "START_EXIT_POPUP";
-    private const string END_LEVEL_EXIT_POPUP = "END_LEVEL_EXIT_POPUP";
-    private const string PAUSE_EXIT_POPUP = "PAUSE_EXIT_POPUP";
-    private const string GAME_OVER_EXIT_POPUP = "GAME_OVER_EXIT_POPUP";
-
-    public void OpenExitPopUp(string exitPopUpOrder)
-    {
-        HandleExitPopUp(exitPopUpOrder, true);
-    }
-
-    public void CloseExitPopUp(string exitPopUpOrder)
-    {
-        HandleExitPopUp(exitPopUpOrder, false);
-    }
-
-    private void HandleExitPopUp(string exitPopUpOrder, bool toggle)
-    {
-
-        if (exitPopUpOrder == START_EXIT_POPUP)
-        {
-            ChangeExitPopupState(0, toggle);
-        }
-        else if (exitPopUpOrder == END_LEVEL_EXIT_POPUP)
-        {
-            ChangeExitPopupState(2, toggle);
-        }
-        else if (exitPopUpOrder == PAUSE_EXIT_POPUP)
-        {
-            ChangeExitPopupState(3, toggle);
-        }
-        else if (exitPopUpOrder == GAME_OVER_EXIT_POPUP)
-        {
-            ChangeExitPopupState(4, toggle);
-        }
-    }
-
-    public bool ReturnPauseExitPopupState()
-    {
-        return exitPopup[3].GetComponent<Canvas>().enabled;
-    }
-
-    public void ChangeExitPopupState(int arrayIndex, bool toggle)
-    {
-        exitPopup[arrayIndex].GetComponent<Canvas>().enabled = toggle;
-    }
-
-    public void ClosePauseExitPopupState()
-    {
-        ChangeExitPopupState(3, false);
     }
 }
