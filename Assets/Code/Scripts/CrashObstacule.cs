@@ -11,7 +11,8 @@ public class CrashObstacule : MonoBehaviour
      [SerializeField] private int impactDamage;
      private int totalImpactDamage = 0;
      int[] randomDamageValues = { 0, 3 };
-
+     public AudioClip addPointsSound;
+     private AudioSource _audioScource;
 
     private int ObstaculePoints { get { return obstaculePoints; } }
     private TextMeshPro PointsLabel { get { return pointsLabel; } }
@@ -27,6 +28,7 @@ public class CrashObstacule : MonoBehaviour
     {
         PointsLabel.text = ObstaculePoints.ToString();
         PointsLabel.enabled = false;
+        _audioScource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -34,10 +36,12 @@ public class CrashObstacule : MonoBehaviour
     
         if (collision.tag == "Player")
         {
-
+            if(PointsLabel.enabled == false)
+            {
+                _audioScource.PlayOneShot(addPointsSound, 1);
+            }
             PointsLabel.enabled = true;
- 
-            Invoke("DestroyObject", 0.5f);
+            Invoke("DestroyObject", 0.9f);
         }
     }
 
