@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     private float horizontal, vertical;
     private Vector3 startPlayerPosition;
+    private Quaternion startPlayerRotation;
     private Vector3 recalculatePlayerPosition = new Vector3(0, 0, 0);
 
     public int Resistence { get => resistence; set => resistence = value; }
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         
         startPlayerPosition = transform.position;
+        startPlayerRotation = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
         InitialResistence = Resistence;
     }
@@ -140,6 +142,7 @@ public class PlayerController : MonoBehaviour
     public void ResetPlayerPosition()
     {
         transform.position = startPlayerPosition;
+        transform.rotation = startPlayerRotation;
     }
 
     /// <summary>
