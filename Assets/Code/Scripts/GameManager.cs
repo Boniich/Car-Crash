@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     private Scrollbar myScrollBar;
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
+    private CrashObstacule[] obstacules;
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
     private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
+
         HandleViewActivation();
     }
 
@@ -102,6 +105,10 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateResistenceCount();
         NotAddToMaxScore = false;
         resistenceRecuperator.SetActive(true);
+        obstacules = FindObjectsOfType<CrashObstacule>();
+        int obstaculeRandom = Random.Range(0, obstacules.Length-1);
+        obstacules[obstaculeRandom].ActivePoweUp = true;
+        Debug.Log(obstacules.Length);
     }
 
     /// <summary>

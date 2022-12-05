@@ -13,6 +13,9 @@ public class CrashObstacule : MonoBehaviour
      int[] randomDamageValues = { 0, 3 };
      public AudioClip addPointsSound;
      private AudioSource _audioScource;
+     private PoweUp poweUp = new PoweUp();
+     [SerializeField] private bool activePoweUp;
+     private float destroyObjectTime = 0.9f;
 
     private int ObstaculePoints { get { return obstaculePoints; } }
     private TextMeshPro PointsLabel { get { return pointsLabel; } }
@@ -22,7 +25,7 @@ public class CrashObstacule : MonoBehaviour
 
     private int TotalImpactDamage { get => totalImpactDamage; set => totalImpactDamage = value; }
 
-
+    public bool ActivePoweUp { get => activePoweUp; set => activePoweUp = value; }
 
     private void Start()
     {
@@ -41,26 +44,42 @@ public class CrashObstacule : MonoBehaviour
                 _audioScource.PlayOneShot(addPointsSound, 1);
             }
             PointsLabel.enabled = true;
-            Invoke("DestroyObject", 0.9f);
+
+            if (ActivePoweUp)
+            {
+                Debug.Log("Powe up");
+                int points = poweUp.DuplicatePoints(obstaculePoints);
+                Debug.Log(points);
+                PointsLabel.text = $"{points} ({ObstaculePoints} x 2)";
+                PointsLabel.color = Color.green;
+                StartCoroutine(DestroyObject(points));
+            }
+            else
+            {
+                StartCoroutine(DestroyObject(ObstaculePoints));
+            }
+
+            
         }
     }
+
 
     /// <summary>
     /// Destroy and update UI after each time time that an object is destroyed
     /// </summary>
 
-    private void DestroyObject()
+    IEnumerator DestroyObject(int points)
     {
-        
+        yield return new WaitForSeconds(destroyObjectTime);
         ReduceResistence();
         Destroy(gameObject);
         SpawnManager.sharedInstance.ObstaculeDiscount();
-        GameManager.sharedInstance.GainPoints(ObstaculePoints);
+        GameManager.sharedInstance.GainPoints(points);
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
         ViewInGame.sharedInstance.UpdateResistenceCount();
         ViewInGame.sharedInstance.UpdateImpactDamage(TotalImpactDamage);
-
     }
+
 
     /// <summary>
     /// Reduce resistence of car each time that player impact with and object
