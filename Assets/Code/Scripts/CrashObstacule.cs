@@ -16,6 +16,7 @@ public class CrashObstacule : MonoBehaviour
      private PoweUp poweUp = new PoweUp();
      [SerializeField] private bool activePoweUp;
      private float destroyObjectTime = 0.9f;
+     private Color powerUpColor = Color.green;
 
     private int ObstaculePoints { get { return obstaculePoints; } }
     private TextMeshPro PointsLabel { get { return pointsLabel; } }
@@ -47,11 +48,9 @@ public class CrashObstacule : MonoBehaviour
 
             if (ActivePoweUp)
             {
-                Debug.Log("Powe up");
                 int points = poweUp.DuplicatePoints(obstaculePoints);
-                Debug.Log(points);
-                PointsLabel.text = $"{points} ({ObstaculePoints} x 2)";
-                PointsLabel.color = Color.green;
+                string labelAfterPowerUp = $"{points} ({ObstaculePoints} x 2)";
+                UpdatePointsLabel(labelAfterPowerUp, powerUpColor);
                 StartCoroutine(DestroyObject(points));
             }
             else
@@ -61,6 +60,18 @@ public class CrashObstacule : MonoBehaviour
 
             
         }
+    }
+
+    /// <summary>
+    /// Update points label of obstacule that get a power up or power down
+    /// </summary>
+    /// <param name="newText">new text that will be rendered after active power up/down</param>
+    /// <param name="color">new color that will be rendered after active power up/down</param>
+
+    private void UpdatePointsLabel(string newText, Color color)
+    {
+        PointsLabel.text = newText;
+        PointsLabel.color = color;
     }
 
 

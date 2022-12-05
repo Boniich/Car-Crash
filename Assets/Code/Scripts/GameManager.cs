@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
     private Scrollbar myScrollBar;
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
-    private CrashObstacule[] obstacules;
+    private List<CrashObstacule> obstaculesList = new List<CrashObstacule> ();
+
+    public int PowerUpAmount;
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
     private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
@@ -105,10 +107,30 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateResistenceCount();
         NotAddToMaxScore = false;
         resistenceRecuperator.SetActive(true);
-        obstacules = FindObjectsOfType<CrashObstacule>();
-        int obstaculeRandom = Random.Range(0, obstacules.Length-1);
-        obstacules[obstaculeRandom].ActivePoweUp = true;
-        Debug.Log(obstacules.Length);
+        obstaculesList.AddRange(FindObjectsOfType<CrashObstacule>());
+        AddPowerUp();
+    }
+
+    public void AddPowerUp()
+    {
+
+        if(PowerUpAmount == 0)
+        {
+            Debug.Log("No hay powerup asignados");
+            return;
+        }
+
+   
+        for(int e = 0; e < PowerUpAmount; e++)
+        {
+            
+            int obstaculeRandom = Random.Range(0, obstaculesList.Count - 1);
+            obstaculesList[obstaculeRandom].ActivePoweUp = true;
+            obstaculesList.RemoveAt(obstaculeRandom);
+        }
+
+    
+
     }
 
     /// <summary>
