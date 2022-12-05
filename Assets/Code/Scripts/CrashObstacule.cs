@@ -14,9 +14,12 @@ public class CrashObstacule : MonoBehaviour
      public AudioClip addPointsSound;
      private AudioSource _audioScource;
      private PoweUp poweUp = new PoweUp();
-     [SerializeField] private bool activePoweUp;
+     private PowerDown powerDown = new PowerDown();
+     private bool activePoweUp;
+     private bool activePowerDown;
      private float destroyObjectTime = 0.9f;
      private Color powerUpColor = Color.green;
+     private Color powerDownColor = Color.red;
 
     private int ObstaculePoints { get { return obstaculePoints; } }
     private TextMeshPro PointsLabel { get { return pointsLabel; } }
@@ -27,6 +30,8 @@ public class CrashObstacule : MonoBehaviour
     private int TotalImpactDamage { get => totalImpactDamage; set => totalImpactDamage = value; }
 
     public bool ActivePoweUp { get => activePoweUp; set => activePoweUp = value; }
+
+    public bool ActivePowerDown { get => activePowerDown; set => activePowerDown = value; }
 
     private void Start()
     {
@@ -51,6 +56,12 @@ public class CrashObstacule : MonoBehaviour
                 int points = poweUp.DuplicatePoints(obstaculePoints);
                 string labelAfterPowerUp = $"{points} ({ObstaculePoints} x 2)";
                 UpdatePointsLabel(labelAfterPowerUp, powerUpColor);
+                StartCoroutine(DestroyObject(points));
+            } else if (ActivePowerDown) 
+            {
+                int points = powerDown.DontAddPoints();
+                string labelAfterPowerDown = "No suma puntos";
+                UpdatePointsLabel(labelAfterPowerDown, powerDownColor);
                 StartCoroutine(DestroyObject(points));
             }
             else
