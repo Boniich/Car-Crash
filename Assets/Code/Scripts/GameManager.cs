@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateResistenceCount();
         NotAddToMaxScore = false;
         resistenceRecuperator.SetActive(true);
+        if(obstaculesList.Count > 0) obstaculesList.Clear();
         obstaculesList.AddRange(FindObjectsOfType<CrashObstacule>());
         AddPowerUp();
     }
