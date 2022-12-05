@@ -44,10 +44,8 @@ public class GameManager : MonoBehaviour
     private Scrollbar myScrollBar;
     private Toggle myToggle;
     private GameObject resistenceRecuperator;
-    private List<CrashObstacule> obstaculesList = new List<CrashObstacule> ();
+    private PowerManager powerManager;
 
-    public int PowerUpAmount;
-    public int powerDownAmount;
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
     private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
@@ -69,7 +67,7 @@ public class GameManager : MonoBehaviour
         myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
-
+        powerManager = FindObjectOfType<PowerManager>();
         HandleViewActivation();
     }
 
@@ -108,57 +106,10 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateResistenceCount();
         NotAddToMaxScore = false;
         resistenceRecuperator.SetActive(true);
-        if(obstaculesList.Count > 0) obstaculesList.Clear();
-        obstaculesList.AddRange(FindObjectsOfType<CrashObstacule>());
-        AddPowerUp();
-        AddPowerDown();
+        powerManager.AddObstaculesToList();
+        powerManager.AddPowerUp();
+        powerManager.AddPowerDown();
     }
-
-    public void AddPowerUp()
-    {
-
-        if(PowerUpAmount == 0)
-        {
-            Debug.Log("No hay powerup asignados");
-            return;
-        }
-
-   
-        for(int e = 0; e < PowerUpAmount; e++)
-        {
-            
-            int obstaculeRandom = Random.Range(0, obstaculesList.Count - 1);
-            obstaculesList[obstaculeRandom].ActivePoweUp = true;
-            obstaculesList.RemoveAt(obstaculeRandom);
-        }
-
-    
-
-    }
-
-
-    public void AddPowerDown()
-    {
-
-        if (powerDownAmount == 0)
-        {
-            Debug.Log("No hay powerdown asignados");
-            return;
-        }
-
-
-        for (int e = 0; e < powerDownAmount; e++)
-        {
-
-            int obstaculeRandom = Random.Range(0, obstaculesList.Count - 1);
-            obstaculesList[obstaculeRandom].ActivePowerDown = true;
-            obstaculesList.RemoveAt(obstaculeRandom);
-        }
-
-
-
-    }
-
 
     /// <summary>
     /// This function is called when a player press the button back in the option menu.
