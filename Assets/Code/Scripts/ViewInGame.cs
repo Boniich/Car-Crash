@@ -19,6 +19,7 @@ public class ViewInGame : MonoBehaviour
     private Image imageComponent;
     private Color impactColor = new Color(0.9333333f, 0.1176471f, 0.1176471f, 0.3921569f); //HEX: EE1E1E
     private Color recuperateColor = new Color(0f, 0.5019608f, 0.2156863f, 0.3921569f); //HEX: 008037
+    private Color subResistencePanelInitialColor = new Color(0.2196078f, 0.2196078f, 0.2196078f, 0.3921569f); //HEX: 383838
     // Start is called before the first frame update
 
     private void Awake()
@@ -94,6 +95,15 @@ public class ViewInGame : MonoBehaviour
     {
         ChangeColorSubResistencePanel(recuperateColor);
         impactDamage.text = "+ " + resistenceRecuperate.ToString();
+    }
+
+    /// <summary>
+    /// Reset values in sub resistence panel when is press the button of "play again"
+    /// </summary>
+    public void ResetSubResitencePanel()
+    {
+        ChangeColorSubResistencePanel(subResistencePanelInitialColor);
+        impactDamage.text = "0";
     }
 
     /// <summary>
