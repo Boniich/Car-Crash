@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [Range(0, 50), SerializeField] private float speed = 0.0f;
     [Range(0, 50), SerializeField] private float turnSpeed = 0.0f;
-    private int resistence = 100;
+    [Range(0, 100), SerializeField] private int resistence = 100;
     private int initialResistence;
     [SerializeField] private bool enablePhysicsEngine;
 

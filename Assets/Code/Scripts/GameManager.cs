@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private Canvas pauseMenu;
     [SerializeField]  private Canvas gameOverView;
     private bool breakEndGame;
+    private bool breakGameOver;
     private bool notAddToMaxScore = false;
     private AudioSource myAudio;
     private Scrollbar myScrollBar;
@@ -48,6 +49,9 @@ public class GameManager : MonoBehaviour
 
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
+
+    private bool BreakGameOver { get => breakGameOver; set => breakGameOver = value; }
+
     private GameState PrevGameState { get => prevGameState; set => prevGameState = value; }
 
     private bool NotAddToMaxScore { get => notAddToMaxScore; set => notAddToMaxScore = value; }
@@ -75,7 +79,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if(PlayerController.sharedInstance.Resistence == 0)
+        if(PlayerController.sharedInstance.Resistence == 0 && BreakGameOver == false)
         {
             GameOver();
         }
@@ -125,6 +129,11 @@ public class GameManager : MonoBehaviour
         else if(PrevGameState == GameState.inGame)
         {
             ChangeGameState(GameState.pauseMenu);
+        } 
+        else if (PrevGameState == GameState.gameOver)
+        {
+            ChangeGameState(GameState.gameOver);
+            BreakGameOver = false;
         }
         else
         {
@@ -145,7 +154,12 @@ public class GameManager : MonoBehaviour
         {
             PrevGameState = GameState.endOfGame;
             BreakEndGame = true;
+        }else if(GetGameState() == GameState.gameOver)
+        {
+            PrevGameState = GameState.gameOver;
+            BreakGameOver = true;
         }
+
         ChangeGameState(GameState.optionMenu);
     }
 
