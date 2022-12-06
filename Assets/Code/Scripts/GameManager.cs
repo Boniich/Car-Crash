@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     private AudioSource myAudio;
     private Scrollbar myScrollBar;
     private Toggle myToggle;
-    private GameObject resistenceRecuperator;
+    private ResistanceRecuperator resistenceRecuperator;
     private PowerManager powerManager;
 
 
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         myToggle = optionMenu.GetComponentInChildren<Toggle>();
         myScrollBar.value = audioProcess.LoadScrollBackgroundMusic();
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
-        resistenceRecuperator = GameObject.FindGameObjectWithTag("ResistenceRecuperator");
+        resistenceRecuperator = FindObjectOfType<ResistanceRecuperator>();
         powerManager = FindObjectOfType<PowerManager>();
         HandleViewActivation();
     }
@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.UpdateMaxScoreText();
         ViewInGame.sharedInstance.UpdateResistenceCount();
         NotAddToMaxScore = false;
-        resistenceRecuperator.SetActive(true);
         powerManager.AddObstaculesToList();
         powerManager.AddPowerUp();
         powerManager.AddPowerDown();
@@ -195,6 +194,7 @@ public class GameManager : MonoBehaviour
         ViewInGame.sharedInstance.ResetSubResitencePanel();
         StartGame();
         points.ResetPoints();
+        resistenceRecuperator.ActiveResistenceRecuperator();
 
     }
 
