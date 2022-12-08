@@ -22,7 +22,7 @@ public class PopupManager : MonoBehaviour
 
     void Start()
     {
-        exitPopup = GameObject.FindGameObjectsWithTag("ExitPopup");
+        exitPopup = GameObject.FindGameObjectsWithTag("ExitPopup2");
         resetMaxScorePopup = GameObject.FindGameObjectWithTag("ResetMaxScorePopup");
         successMaxScoreResetPopup = GameObject.FindGameObjectWithTag("SuccessMaxScoreReset");
     }
@@ -82,15 +82,15 @@ public class PopupManager : MonoBehaviour
         }
         else if (exitPopUpOrder == END_LEVEL_EXIT_POPUP)
         {
-            ChangeExitPopupState(2, toggle);
+            ChangeExitPopupState(1, toggle);
         }
         else if (exitPopUpOrder == PAUSE_EXIT_POPUP)
         {
-            ChangeExitPopupState(3, toggle);
+            ChangeExitPopupState(2, toggle);
         }
         else if (exitPopUpOrder == GAME_OVER_EXIT_POPUP)
         {
-            ChangeExitPopupState(4, toggle);
+            ChangeExitPopupState(3, toggle);
         }
     }
 
@@ -101,7 +101,7 @@ public class PopupManager : MonoBehaviour
 
     public bool ReturnPauseExitPopupState()
     {
-        return exitPopup[3].GetComponent<Canvas>().enabled;
+        return exitPopup[2].GetComponent<Canvas>().enabled;
     }
 
     /// <summary>
@@ -121,6 +121,6 @@ public class PopupManager : MonoBehaviour
 
     public void ClosePauseExitPopupState()
     {
-        ChangeExitPopupState(3, false);
+        ChangeExitPopupState(2, false);
     }
 }

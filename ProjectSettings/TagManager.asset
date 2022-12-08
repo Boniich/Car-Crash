@@ -12,6 +12,7 @@ TagManager:
   - ResetMaxScorePopup
   - SuccessMaxScoreReset
   - PoweManager
+  - ExitPopup2
   layers:
   - Default
   - TransparentFX
