@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     private Toggle myToggle;
     private ResistanceRecuperator resistenceRecuperator;
     private PowerManager powerManager;
+    private Timer timer;
 
 
     private bool BreakEndGame { get => breakEndGame; set => breakEndGame = value; }
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
         myAudio.volume = audioProcess.LoadScrollBackgroundMusic();
         resistenceRecuperator = FindObjectOfType<ResistanceRecuperator>();
         powerManager = FindObjectOfType<PowerManager>();
+        timer = FindObjectOfType<Timer>();
         HandleViewActivation();
     }
 
@@ -79,7 +81,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if(PlayerController.sharedInstance.Resistence == 0 && BreakGameOver == false)
+        if((PlayerController.sharedInstance.Resistence == 0 || timer.GetEndTimer()) && BreakGameOver == false)
         {
             GameOver();
         }
@@ -112,6 +114,7 @@ public class GameManager : MonoBehaviour
         powerManager.AddObstaculesToList();
         powerManager.AddPowerUp();
         powerManager.AddPowerDown();
+        timer.StartTimer();
     }
 
     /// <summary>
@@ -186,7 +189,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayAgain()
     {
-
+        timer.RestartTimer();
         SpawnManager.sharedInstance.DestroyAllOldObstacules();
         SpawnManager.sharedInstance.ResetDestroyedObstaculeCount();
         PlayerController.sharedInstance.ResetPlayerPosition();
@@ -195,6 +198,7 @@ public class GameManager : MonoBehaviour
         StartGame();
         points.ResetPoints();
         resistenceRecuperator.ActiveResistenceRecuperator();
+        
 
     }
 
