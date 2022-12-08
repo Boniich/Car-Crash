@@ -18,8 +18,8 @@ public class CrashObstacule : MonoBehaviour
      private bool activePoweUp;
      private bool activePowerDown;
      private float destroyObjectTime = 0.9f;
-     private Color powerUpColor = Color.green;
-     private Color powerDownColor = Color.red;
+     private Color powerUpColor = new Color(0f, 0.5019608f, 0.2156863f, 1f); //HEX: 008037
+     private Color powerDownColor =  new Color(0.9333333f, 0.1176471f, 0.1176471f, 1f); //HEX: EE1E1E
 
     private int ObstaculePoints { get { return obstaculePoints; } }
     private TextMeshPro PointsLabel { get { return pointsLabel; } }

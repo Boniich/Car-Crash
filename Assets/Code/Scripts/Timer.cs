@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     private float initialTimerTime;
     private int minutes, seconds;
     private bool endTimer;
+    private Color lastTeenSecondsColor = new Color(0.9333333f, 0.1176471f, 0.1176471f, 1f); //HEX: EE1E1E
 
 
     void Start()
@@ -77,9 +78,11 @@ public class Timer : MonoBehaviour
 
             if(timerTime >= 0 && timerTime <= 11)
             {
-                timerText.color = Color.red;
 
-            }else if (timerTime <= 0)
+                timerText.color = lastTeenSecondsColor;
+
+            }
+            else if (timerTime <= 0)
             {
                 isTrue = false;
                 SetEndTimer(true);
