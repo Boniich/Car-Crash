@@ -97,6 +97,7 @@ public class CrashObstacule : MonoBehaviour
         Destroy(gameObject);
         SpawnManager.sharedInstance.ObstaculeDiscount();
         GameManager.sharedInstance.GainPoints(points);
+        ViewInGame.sharedInstance.ShowObstaculePoints(points);
         ViewInGame.sharedInstance.UpdateObstaculeCountText();
         ViewInGame.sharedInstance.UpdateResistenceCount();
         ViewInGame.sharedInstance.UpdateImpactDamage(TotalImpactDamage);

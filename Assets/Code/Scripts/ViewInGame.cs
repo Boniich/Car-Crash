@@ -13,6 +13,13 @@ public class ViewInGame : MonoBehaviour
     [SerializeField]  private TextMeshProUGUI obstaculeCountText;
     [SerializeField]  private TextMeshProUGUI resistenceCount;
     [SerializeField]  private TextMeshProUGUI impactDamage;
+    [SerializeField]  private TextMeshProUGUI obstaculePoints;
+
+    [Space]
+
+    [SerializeField] private TextMeshProUGUI PowerUpText;
+    [SerializeField] private TextMeshProUGUI PowerDownText;
+
     private GameObject subResistentePanel;
     private GameObject resistenceIsFullWindow;
     private float timeToDisableResistenceIsFullWindow = 3f;
@@ -139,4 +146,35 @@ public class ViewInGame : MonoBehaviour
         yield return new WaitForSeconds(timeToDisableResistenceIsFullWindow);
         ViewInGame.sharedInstance.ToggleResistenceIsFullWindow(false);
     }
+
+
+    /// <summary>
+    /// Show individual points of each obstacule in the ingame view
+    /// </summary>
+    /// <param name="points"></param>
+
+    public void ShowObstaculePoints(int points)
+    {
+        obstaculePoints.text = "+ " + points.ToString();
+    }
+
+    /// <summary>
+    /// restart individiual points
+    /// </summary>
+
+    public void ResetObstaculePoints()
+    {
+        obstaculePoints.text = "0";
+    }
+
+    public void ShowPowerUp()
+    {
+        //
+    }
+
+    public void ShowPowerDown()
+    {
+        //
+    }
+    
 }
