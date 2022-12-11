@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
         PlayerController.sharedInstance.ResetResistence();
         ViewInGame.sharedInstance.ResetSubResitencePanel();
         ViewInGame.sharedInstance.ResetObstaculePoints();
+        ViewInGame.sharedInstance.ResetPowerView();
         StartGame();
         points.ResetPoints();
         resistenceRecuperator.ActiveResistenceRecuperator();

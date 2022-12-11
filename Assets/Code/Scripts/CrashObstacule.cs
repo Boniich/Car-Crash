@@ -55,12 +55,14 @@ public class CrashObstacule : MonoBehaviour
             {
                 int points = poweUp.DuplicatePoints(obstaculePoints);
                 string labelAfterPowerUp = $"{points} ({ObstaculePoints} x 2)";
+                ViewInGame.sharedInstance.ShowPowerUp("duplica");
                 UpdatePointsLabel(labelAfterPowerUp, powerUpColor);
                 StartCoroutine(DestroyObject(points));
             } else if (ActivePowerDown) 
             {
                 int points = powerDown.DontAddPoints();
                 string labelAfterPowerDown = "No suma puntos";
+                ViewInGame.sharedInstance.ShowPowerDown("no suma");
                 UpdatePointsLabel(labelAfterPowerDown, powerDownColor);
                 StartCoroutine(DestroyObject(points));
             }
