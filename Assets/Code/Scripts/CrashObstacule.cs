@@ -7,7 +7,6 @@ public class CrashObstacule : MonoBehaviour
 {
    
      [SerializeField] private int obstaculePoints;
-     [SerializeField] private TextMeshPro pointsLabel;
      [SerializeField] private int impactDamage;
      private int totalImpactDamage = 0;
      int[] randomDamageValues = { 0, 3 };
@@ -18,11 +17,9 @@ public class CrashObstacule : MonoBehaviour
      private bool activePoweUp;
      private bool activePowerDown;
      private float destroyObjectTime = 0.9f;
-     private Color powerUpColor = new Color(0f, 0.5019608f, 0.2156863f, 1f); //HEX: 008037
-     private Color powerDownColor =  new Color(0.9333333f, 0.1176471f, 0.1176471f, 1f); //HEX: EE1E1E
+     private bool used;
 
     private int ObstaculePoints { get { return obstaculePoints; } }
-    private TextMeshPro PointsLabel { get { return pointsLabel; } }
 
     private int ImpactDamage { get => impactDamage;}
 
@@ -35,35 +32,25 @@ public class CrashObstacule : MonoBehaviour
 
     private void Start()
     {
-        PointsLabel.text = ObstaculePoints.ToString();
-        PointsLabel.enabled = false;
         _audioScource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
     
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !used)
         {
-            if(PointsLabel.enabled == false)
-            {
-                _audioScource.PlayOneShot(addPointsSound, 1);
-            }
-            PointsLabel.enabled = true;
+            _audioScource.PlayOneShot(addPointsSound, 1);
 
             if (ActivePoweUp)
             {
                 int points = poweUp.DuplicatePoints(obstaculePoints);
-                string labelAfterPowerUp = $"{points} ({ObstaculePoints} x 2)";
                 ViewInGame.sharedInstance.ShowPowerUp("duplica");
-                UpdatePointsLabel(labelAfterPowerUp, powerUpColor);
                 StartCoroutine(DestroyObject(points));
             } else if (ActivePowerDown) 
             {
                 int points = powerDown.DontAddPoints();
-                string labelAfterPowerDown = "No suma puntos";
                 ViewInGame.sharedInstance.ShowPowerDown("no suma");
-                UpdatePointsLabel(labelAfterPowerDown, powerDownColor);
                 StartCoroutine(DestroyObject(points));
             }
             else
@@ -71,22 +58,9 @@ public class CrashObstacule : MonoBehaviour
                 StartCoroutine(DestroyObject(ObstaculePoints));
             }
 
-            
+            used = true;
         }
     }
-
-    /// <summary>
-    /// Update points label of obstacule that get a power up or power down
-    /// </summary>
-    /// <param name="newText">new text that will be rendered after active power up/down</param>
-    /// <param name="color">new color that will be rendered after active power up/down</param>
-
-    private void UpdatePointsLabel(string newText, Color color)
-    {
-        PointsLabel.text = newText;
-        PointsLabel.color = color;
-    }
-
 
     /// <summary>
     /// Destroy and update UI after each time time that an object is destroyed
