@@ -8,8 +8,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private float timerTime;
     private float initialTimerTime;
-    private int minutes, seconds;
+    public int minutes, seconds;
     private bool endTimer;
+    private bool startTimer = true;
     private Color lastTeenSecondsColor = new Color(0.9333333f, 0.1176471f, 0.1176471f, 1f); //HEX: EE1E1E
 
 
@@ -56,7 +57,18 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
+        startTimer = true;
         StartCoroutine(HandleTimer());
+    }
+
+    /// <summary>
+    /// Pause timer when the state of game changes, states like pause or gameover
+    /// </summary>
+    public void PauseTimer()
+    {
+        startTimer = false;
+        StopCoroutine(HandleTimer());
+        
     }
 
     /// <summary>
@@ -65,8 +77,7 @@ public class Timer : MonoBehaviour
     /// <returns></returns>
     private IEnumerator HandleTimer()
     {
-        bool isTrue = true;
-        while (isTrue)
+        while (startTimer)
         {
             if (timerTime < 0) timerTime = 0;
 
@@ -84,7 +95,7 @@ public class Timer : MonoBehaviour
             }
             else if (timerTime <= 0)
             {
-                isTrue = false;
+                startTimer = false;
                 SetEndTimer(true);
             }
 

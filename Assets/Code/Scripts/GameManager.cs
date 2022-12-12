@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-
+        timer.PauseTimer();
         ChangeGameState(GameState.endOfGame);
         ViewEndOfGame.sharedInstance.UpdatePointsAtEndOfGame();
         if (!NotAddToMaxScore)
@@ -219,6 +219,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void GameOver()
     {
+        timer.PauseTimer();
         ChangeGameState(GameState.gameOver);
     }
 
@@ -333,7 +334,9 @@ public class GameManager : MonoBehaviour
 
     public void ComeBackToPlay()
     {
+        timer.StartTimer();
         ChangeGameState(GameState.inGame);
+        
     }
 
 
@@ -350,6 +353,7 @@ public class GameManager : MonoBehaviour
                 {
                     ChangeGameState(GameState.pauseMenu);
                     PrevGameState = GameState.inGame;
+                    timer.PauseTimer();
 
                 }
                 else if (GetGameState() == GameState.pauseMenu)
