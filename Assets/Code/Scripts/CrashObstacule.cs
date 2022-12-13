@@ -45,12 +45,12 @@ public class CrashObstacule : MonoBehaviour
             if (ActivePoweUp)
             {
                 int points = poweUp.DuplicatePoints(obstaculePoints);
-                ViewInGame.sharedInstance.ShowPowerUp("duplica");
+                ViewInGame.sharedInstance.ShowPowerUp();
                 StartCoroutine(DestroyObject(points));
             } else if (ActivePowerDown) 
             {
                 int points = powerDown.DontAddPoints();
-                ViewInGame.sharedInstance.ShowPowerDown("no suma");
+                ViewInGame.sharedInstance.ShowPowerDown();
                 StartCoroutine(DestroyObject(points));
             }
             else

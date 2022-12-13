@@ -15,18 +15,6 @@ public class ViewInGame : MonoBehaviour
     [SerializeField]  private TextMeshProUGUI impactDamage;
     [SerializeField]  private TextMeshProUGUI obstaculePoints;
 
-    [Space]
-
-    [SerializeField] private TextMeshProUGUI PowerUpText;
-    [SerializeField] private TextMeshProUGUI PowerDownText;
-
-    [Space]
-
-    [SerializeField] private Sprite[] PowerUpIcons;
-    [SerializeField] private Sprite[] PowerDownIcons;
-
-
-    private Image powerUpIcon;
     private Image powerDownIcon;
 
     private Canvas powerUpCanvas;
@@ -54,8 +42,6 @@ public class ViewInGame : MonoBehaviour
         resistenceIsFullWindow = GameObject.FindGameObjectWithTag("ResistenceIsFullWindow");
         ToggleResistenceIsFullWindow(false);
 
-        powerUpIcon = GameObject.FindGameObjectWithTag("PoweUpIcon").GetComponent<Image>();
-        powerDownIcon = GameObject.FindGameObjectWithTag("PowerDownIcon").GetComponent<Image>();
         powerUpCanvas = GameObject.FindGameObjectWithTag("PowerUpCanvas").GetComponent<Canvas>();
         powerDownCanvas = GameObject.FindGameObjectWithTag("PowerDownCanvas").GetComponent<Canvas>();
     }
@@ -205,20 +191,9 @@ public class ViewInGame : MonoBehaviour
     /// <summary>
     /// Active the view in the ingame ui that give player the feedback of a active power up
     /// </summary>
-    /// <param name="typePowerUp"></param>
-    public void ShowPowerUp(string typePowerUp)
+    public void ShowPowerUp()
     {
-
         TogglePowerUpView();
-        
-
-        if(typePowerUp == "duplica")
-        {
-            
-            powerUpIcon.color = new Color(1f, 1f, 1f, 1f);
-            powerUpIcon.sprite = PowerUpIcons[0];
-            PowerUpText.text = "Duplica puntos";
-        }
     }
 
     /// <summary>
@@ -226,16 +201,9 @@ public class ViewInGame : MonoBehaviour
     /// </summary>
     /// <param name="typePowerDown"></param>
 
-    public void ShowPowerDown(string typePowerDown)
+    public void ShowPowerDown()
     {
         TogglePowerDownView();
-
-        if (typePowerDown == "no suma")
-        {
-            powerDownIcon.color = new Color(1f, 1f, 1f, 1f);
-            powerDownIcon.sprite = PowerDownIcons[0];
-            PowerDownText.text = "No suma puntos";
-        }
     }
     
 }
