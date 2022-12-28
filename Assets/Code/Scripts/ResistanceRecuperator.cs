@@ -35,9 +35,9 @@ public class ResistanceRecuperator : MonoBehaviour
                 _audioSource.PlayOneShot(resistenceRecuperateSound, 1);
                 PlayerController.sharedInstance.Resistence += recuperateResistence;
 
-                if(PlayerController.sharedInstance.Resistence > 100)
+                if(PlayerController.sharedInstance.Resistence > 50)
                 {
-                    PlayerController.sharedInstance.Resistence = 100;
+                    PlayerController.sharedInstance.Resistence = 50;
                 }
 
                 used = true;
