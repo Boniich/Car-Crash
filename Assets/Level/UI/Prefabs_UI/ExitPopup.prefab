@@ -304,7 +304,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793347747304441458}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -489,7 +489,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: END_LEVEL_EXIT_POPUP
+          m_StringArgument: START_EXIT_POPUP
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &793347747504187948
