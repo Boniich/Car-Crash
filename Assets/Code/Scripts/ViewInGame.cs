@@ -15,7 +15,9 @@ public class ViewInGame : MonoBehaviour
     [SerializeField]  private TextMeshProUGUI impactDamage;
     [SerializeField]  private TextMeshProUGUI obstaculePoints;
 
-    private Image powerDownIcon;
+    [Space]
+
+    [SerializeField] private Animator powerUpFadeIn;
 
     private Canvas powerUpCanvas;
     private Canvas powerDownCanvas;
@@ -194,6 +196,18 @@ public class ViewInGame : MonoBehaviour
     public void ShowPowerUp()
     {
         TogglePowerUpView();
+        StartCoroutine(TurnOffPowerUpView());
+    }
+
+    /// <summary>
+    /// Turn off power up view after 'x' time
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TurnOffPowerUpView()
+    {
+        
+        yield return new WaitForSeconds(5f);
+        TogglePowerUpView(false);
     }
 
     /// <summary>
@@ -204,6 +218,13 @@ public class ViewInGame : MonoBehaviour
     public void ShowPowerDown()
     {
         TogglePowerDownView();
+        StartCoroutine(TurnOffPowerDownView());
+    }
+
+    IEnumerator TurnOffPowerDownView()
+    {
+        yield return new WaitForSeconds(5f);
+        TogglePowerDownView(false);
     }
     
 }
