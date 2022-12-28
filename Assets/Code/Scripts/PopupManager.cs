@@ -50,48 +50,82 @@ public class PopupManager : MonoBehaviour
         successMaxScoreResetPopup.GetComponent<Canvas>().enabled = toggle;
     }
 
+
+    /// <summary>
+    /// Open exit pop in start UI
+    /// </summary>
     public void OpenStartExitPopup()
     {
         startExitPopup.GetComponent<Canvas>().enabled = true;
     }
+
+    /// <summary>
+    /// Close exit pop in start UI
+    /// </summary>
 
     public void CloseStartExitPopup()
     {
         startExitPopup.GetComponent<Canvas>().enabled = false;
     }
 
+    /// <summary>
+    /// Open exit pop in win player UI
+    /// </summary>
 
     public void OpenWinExitPopup()
     {
         winPlayerExitPopup.GetComponent<Canvas>().enabled = true;
     }
 
+    /// <summary>
+    /// Close exit pop in win player UI
+    /// </summary>
+
     public void CloseWinExitPopup()
     {
         winPlayerExitPopup.GetComponent<Canvas>().enabled = false;
     }
 
+    /// <summary>
+    /// Open exit pop in Pause UI
+    /// </summary>
 
     public void OpenPauseExitPopup()
     {
         pauseExitPopup.GetComponent<Canvas>().enabled = true;
     }
 
+    /// <summary>
+    /// Close exit pop in Pause UI
+    /// </summary>
+
     public void ClosePauseExitPopup()
     {
         pauseExitPopup.GetComponent<Canvas>().enabled = false;
     }
+
+    /// <summary>
+    /// Return state of popup to be able to escape with ESC button
+    /// </summary>
 
     public bool ReturnPauseExitPopupState()
     {
         return pauseExitPopup.GetComponent<Canvas>().enabled;
     }
 
+    /// <summary>
+    /// Open exit pop in game over UI
+    /// </summary>
+
 
     public void OpenGameOverExitPopup()
     {
         gameOverPopup.GetComponent<Canvas>().enabled = true;
     }
+
+    /// <summary>
+    /// Close exit pop in game over UI
+    /// </summary>
 
     public void CloseGameOverExitPopup()
     {
