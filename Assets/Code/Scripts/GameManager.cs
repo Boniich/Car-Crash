@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private Canvas inGameCanvas;
     [SerializeField]  private Canvas endOfGameCanvas;
     [SerializeField]  private Canvas pauseMenu;
-    [SerializeField]  private Canvas gameOverView;
+    [SerializeField]  private Canvas gameOverViewCanvas;
     private bool breakEndGame;
     private bool breakGameOver;
     private bool notAddToMaxScore = false;
@@ -220,6 +220,8 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         timer.PauseTimer();
+        gameOverViewCanvas.GetComponent<GameOverView>().ShowEndTimeSubText();
+        gameOverViewCanvas.GetComponent<GameOverView>().ShowLostAllResistenceSubText();
         ChangeGameState(GameState.gameOver);
     }
 
@@ -252,7 +254,7 @@ public class GameManager : MonoBehaviour
             HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, pauseMenu: true);
         }else if(newGameState == GameState.gameOver)
         {
-            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, pauseMenu: false, gameOverView: true);
+            HandleViewActivation(startMenu: false, optionMenu: false, inGameMenu: false, endOfGameMenu: false, pauseMenu: false, gameOverCanvas: true);
         }
 
 
@@ -270,14 +272,14 @@ public class GameManager : MonoBehaviour
     /// <param name="endOfGameMenu">determinate if end of game view is enabled o disabled.By default it is false</param>
 
     private void HandleViewActivation(bool startMenu = true, bool optionMenu = false, bool inGameMenu = false, 
-        bool endOfGameMenu = false,bool pauseMenu = false, bool gameOverView = false)
+        bool endOfGameMenu = false,bool pauseMenu = false, bool gameOverCanvas = false)
     {
         startMenuCanvas.enabled = startMenu;
         this.optionMenu.enabled = optionMenu;
         inGameCanvas.enabled = inGameMenu;
         endOfGameCanvas.enabled = endOfGameMenu;
         this.pauseMenu.enabled = pauseMenu;
-        this.gameOverView.enabled = gameOverView;
+        this.gameOverViewCanvas.enabled = gameOverCanvas;
     }
     /// <summary>
     /// Return the value of variable points

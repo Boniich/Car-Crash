@@ -17,6 +17,7 @@ TagManager:
   - PowerDownIcon
   - PowerUpCanvas
   - PowerDownCanvas
+  - GameOverView
   layers:
   - Default
   - TransparentFX
