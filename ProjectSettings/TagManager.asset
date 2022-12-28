@@ -18,6 +18,10 @@ TagManager:
   - PowerUpCanvas
   - PowerDownCanvas
   - GameOverView
+  - StartExitPopup
+  - WinExitPopup
+  - PauseExitPopup
+  - GameOverExitPopup
   layers:
   - Default
   - TransparentFX

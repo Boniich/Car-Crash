@@ -367,7 +367,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        PopupManager.sharedInstance.ClosePauseExitPopupState();
+                        PopupManager.sharedInstance.ClosePauseExitPopup();
                     }
                 }
 

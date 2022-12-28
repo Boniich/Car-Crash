@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PopupManager : MonoBehaviour
 {
-    private const string START_EXIT_POPUP = "START_EXIT_POPUP";
-    private const string END_LEVEL_EXIT_POPUP = "END_LEVEL_EXIT_POPUP";
-    private const string PAUSE_EXIT_POPUP = "PAUSE_EXIT_POPUP";
-    private const string GAME_OVER_EXIT_POPUP = "GAME_OVER_EXIT_POPUP";
-
     public static PopupManager sharedInstance;
-    private GameObject[] exitPopup;
     private GameObject resetMaxScorePopup;
     private GameObject successMaxScoreResetPopup;
+
+    private GameObject startExitPopup;
+    private GameObject winPlayerExitPopup;
+    private GameObject pauseExitPopup;
+    private GameObject gameOverPopup;
 
     private void Awake()
     {
@@ -22,7 +21,12 @@ public class PopupManager : MonoBehaviour
 
     void Start()
     {
-        exitPopup = GameObject.FindGameObjectsWithTag("ExitPopup2");
+        startExitPopup = GameObject.FindGameObjectWithTag("StartExitPopup");
+        winPlayerExitPopup = GameObject.FindGameObjectWithTag("WinExitPopup");
+        pauseExitPopup = GameObject.FindGameObjectWithTag("PauseExitPopup");
+        gameOverPopup = GameObject.FindGameObjectWithTag("GameOverExitPopup");
+
+
         resetMaxScorePopup = GameObject.FindGameObjectWithTag("ResetMaxScorePopup");
         successMaxScoreResetPopup = GameObject.FindGameObjectWithTag("SuccessMaxScoreReset");
     }
@@ -46,81 +50,51 @@ public class PopupManager : MonoBehaviour
         successMaxScoreResetPopup.GetComponent<Canvas>().enabled = toggle;
     }
 
-
-    /// <summary>
-    /// Open exit popup to confir that player want to exit from game
-    /// </summary>
-    /// <param name="exitPopUpOrder">it is like id that is necessary to open the correct Exitpopup</param>
-
-    public void OpenExitPopUp(string exitPopUpOrder)
+    public void OpenStartExitPopup()
     {
-        HandleExitPopUp(exitPopUpOrder, true);
+        startExitPopup.GetComponent<Canvas>().enabled = true;
     }
 
-    /// <summary>
-    /// Close exit popup for when player decide not exit from game
-    /// </summary>
-    /// <param name="exitPopUpOrder">it is like id that is necessary to close the correct Exitpopup</param>
-
-    public void CloseExitPopUp(string exitPopUpOrder)
+    public void CloseStartExitPopup()
     {
-        HandleExitPopUp(exitPopUpOrder, false);
+        startExitPopup.GetComponent<Canvas>().enabled = false;
     }
 
-    /// <summary>
-    /// Handle which Exitpopup open with 'exitPopUpOrder' and in which state (open/close)
-    /// </summary>
-    /// <param name="exitPopUpOrder">it is like id that is necessary to close the correct Exitpopup</param>
-    /// <param name="toggle">state that should be change the modal</param>
 
-    private void HandleExitPopUp(string exitPopUpOrder, bool toggle)
+    public void OpenWinExitPopup()
     {
-
-        if (exitPopUpOrder == START_EXIT_POPUP)
-        {
-            ChangeExitPopupState(0, toggle);
-        }
-        else if (exitPopUpOrder == END_LEVEL_EXIT_POPUP)
-        {
-            ChangeExitPopupState(1, toggle);
-        }
-        else if (exitPopUpOrder == PAUSE_EXIT_POPUP)
-        {
-            ChangeExitPopupState(2, toggle);
-        }
-        else if (exitPopUpOrder == GAME_OVER_EXIT_POPUP)
-        {
-            ChangeExitPopupState(3, toggle);
-        }
+        winPlayerExitPopup.GetComponent<Canvas>().enabled = true;
     }
 
-    /// <summary>
-    /// Return the exit popup of pause menu to know if it is open when button is pressed
-    /// </summary>
-    /// <returns></returns>
+    public void CloseWinExitPopup()
+    {
+        winPlayerExitPopup.GetComponent<Canvas>().enabled = false;
+    }
+
+
+    public void OpenPauseExitPopup()
+    {
+        pauseExitPopup.GetComponent<Canvas>().enabled = true;
+    }
+
+    public void ClosePauseExitPopup()
+    {
+        pauseExitPopup.GetComponent<Canvas>().enabled = false;
+    }
 
     public bool ReturnPauseExitPopupState()
     {
-        return exitPopup[2].GetComponent<Canvas>().enabled;
+        return pauseExitPopup.GetComponent<Canvas>().enabled;
     }
 
-    /// <summary>
-    /// Change the state of each canvas of each gameObject that has the tag 'ExitPopup'
-    /// </summary>
-    /// <param name="arrayIndex">an index that correspond to an array that save the gameobject</param>
-    /// <param name="toggle">state of current gameobject</param>
 
-    private void ChangeExitPopupState(int arrayIndex, bool toggle)
+    public void OpenGameOverExitPopup()
     {
-        exitPopup[arrayIndex].GetComponent<Canvas>().enabled = toggle;
+        gameOverPopup.GetComponent<Canvas>().enabled = true;
     }
 
-    /// <summary>
-    /// Close the exit popup of pause menu
-    /// </summary>
-
-    public void ClosePauseExitPopupState()
+    public void CloseGameOverExitPopup()
     {
-        ChangeExitPopupState(2, false);
+        gameOverPopup.GetComponent<Canvas>().enabled = false;
     }
 }
